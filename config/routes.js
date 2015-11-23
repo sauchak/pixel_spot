@@ -12,9 +12,9 @@ router.get('/', welcomeController.index);
 router.get('/users', usersController.index); // to show a list of users
 router.get('/users/:id', usersController.show); // to show one user
 router.post('/userid/spot', usersController.create); // create a new spot
-router.put('/userid/spot/:id', usersController.edit); // to edit a spot
+router.put('/userid/spot/:id', usersController.update); // to edit a spot
 router.get('/userid/spots', usersController.index); // to show all of a user's spots
-router.destroy('/userid/spot/:id', usersController.destroy); // to delete a spot
+router.delete('/userid/spot/:id', usersController.destroy); // to delete a spot
 
 // spots resource paths:
 router.get('/spots', spotsController.show); // to show spots search results
