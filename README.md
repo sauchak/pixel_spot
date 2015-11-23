@@ -6,4 +6,7 @@ ___
    
 # Pixel Spot    
 
-:city_sunset:
+[Pitch Deck]()
+___
+[Trello](https://trello.com/b/KkLQVJFb/pixel-spot)
+___
