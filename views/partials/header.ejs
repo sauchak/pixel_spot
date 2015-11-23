@@ -1,5 +1,11 @@
 <header>
-  <h1><%= title %></h1>
-  <h2><%= subHeading %></h2>
+  <h1><$= title $></h1>
+  <h2><$= subHeading $></h2>
+  <$ if (user) { $>
+  <a href="/logout"><i class="material-icons left"></i>Logout</a>
+  <$ } else { $>
+  <a href="/auth/google"><i class="material-icons left"></i>Login with Google</a>
+  <$ } $>
+
   <hr>
 </header>
