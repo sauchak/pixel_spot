@@ -1,0 +1,63 @@
+    {
+    "name": "Wayne Takeda",
+    "email": "whtakeda@gmail.com",
+    "googleId": "108804978195357308049",
+    "spots": [{"title":"My favorite spot",
+             "description": "An awesome spot",
+             "image_url":"https://www.flickr.com/photos/joannarb2009/15844439235/in/photolist-pATgqL-aDpwBo-q5mpsN-byX3sF-bRBGVn-do9MWz-aDzUjt-q97TLP-nhwKB1-pzyQ69-aASTKL-hxAh1P-jTS82D-oaUccF-dm2Yyt-qq8zMH-efripA-q5hS11-e8y37Z-egHHrP-jGQQ7s-pxWyWk-aEnQos-ah1kdX-i7NAr4-pmQxSB-aDzTHH-q8dWb8-98MCzD-aAeKNU-pNohwn-ibBaSA-e5ZXDV-hACL91-dgEaan-isSanR-6ct9Bp-azJ5Uw-pNcJ1y-ovW9po-8ZE7Qh-qr81hQ-sA4rMz-p954Qu-devwU8-hQKvVK-7ify7c-7GjzFF-e4GtJJ-s6akH9",
+             "lat": 0,
+             "lng": 0,
+             "address":"",
+             "rating":0,
+             "tags":[{"tag_name":"park"},{"tag_name":"trees"},{"tag_name":"bench"}]
+            },
+            {"title":"Another great spot",
+             "description": "This spot is da bomb!!!!",
+             "image_url":"https://www.flickr.com/photos/132798455@N03/18554736046/in/photolist-ugBSAb-okLKRs-yjXUTG-r5WuHj-nqmwci-8aohwc-88y18C-cGDZsm-gbtenn-ft52u1-a4HPi4-nYRLop-oUMovm-7VZP3A-oX5MrM-9k5McQ-nGHKsL-nqm9TN-roydfo-2bDsm9-aHsUPk-4YFxrv-fowQUZ-pA7yaT-tgxY5b-4YXFfh-osfRD6-96VLrm-6EKiai-6GmfjM-apcKFk-4aEoXz-sDAh8i-avXwRN-qNUD8y-sbBpCy-yhGpKB-oZgMa9-o9WqVV-vUSs7f-orTSMa-qK4fiE-cmJ3xu-5TxxkF-zwCazG-vN7wFh-edR8zw-pENr95-fj2TGy-66ZzFK",
+             "address":"",
+             "rating":0,
+             "tags":[{"tag_name":"cat"},{"tag_name":"bench"}]
+            }]
+  }
+  {
+   "name":  "Matthew Butt",
+    "email": "anakin2270@aol.com",
+    "googleId": "108804978195357308050",
+    "spots": [{"title":"The Beach",
+             "description": "A very nice beach",
+             "image_url":"https://www.flickr.com/photos/parismadrid/17029832935/in/photolist-rWSm2e-psoq8E-egFieW-cErZvb-bk5B6i-9uvyPr-7TD5uZ-jYwbo8-qeZLRe-n8x6Xn-dzq2Ws-68DxGi-bnmwjN-c4DxV7-kF39se-nBKtjx-7YLgdX-apPuvi-bzS2Rs-rXJWT4-q1DhYc-a2c9kr-omPwVL-aPGmhK-ziBGRr-jY9diK-mDTbpD-jzSaXQ-cuCWwN-9HvHVt-dBPTZV-odzeYC-8u4yuW-oEDGkL-bTygzn-rhtanH-oRNMGp-oXpW1i-s4Jdat-p8N1RJ-fhpghZ-dX2tPC-v8R2LX-x7M7j1-nqZDVD-xFACNe-cAWLSf-A6FvqE-adcNyU-t2N6Hh",
+             "lat": 0,
+             "lng": 0,
+             "address":"",
+             "rating":0,
+             "tags":[{"tag_name":"beach"},{"tag_name":"trees"},{"tag_name":"bench"}]
+            },
+            {"title":"Another great beach",
+             "description": "This spot is so beachy!",
+             "image_url":"https://www.flickr.com/photos/cubagallery/15394808204/in/photolist-psoq8E-egFieW-cErZvb-bk5B6i-9uvyPr-7TD5uZ-jYwbo8-qeZLRe-n8x6Xn-dzq2Ws-68DxGi-bnmwjN-c4DxV7-kF39se-nBKtjx-7YLgdX-apPuvi-bzS2Rs-rXJWT4-q1DhYc-a2c9kr-omPwVL-aPGmhK-ziBGRr-jY9diK-mDTbpD-jzSaXQ-cuCWwN-9HvHVt-dBPTZV-odzeYC-8u4yuW-oEDGkL-bTygzn-rhtanH-oRNMGp-oXpW1i-s4Jdat-p8N1RJ-fhpghZ-dX2tPC-v8R2LX-x7M7j1-nqZDVD-xFACNe-cAWLSf-A6FvqE-adcNyU-t2N6Hh-j1TaxV",
+             "address":"",
+             "rating":0,
+             "tags":[{"tag_name":"cat"},{"tag_name":"umbrella"}]
+            }]
+  }
+  {
+   "name":  "Chris Sauchak",
+    "email": "chris@aol.com",
+    "googleId": "108804978195357308051",
+    "spots": [{"title":"The Beach",
+             "description": "A very nice beach",
+             "image_url":"https://www.flickr.com/photos/parismadrid/17029832935/in/photolist-rWSm2e-psoq8E-egFieW-cErZvb-bk5B6i-9uvyPr-7TD5uZ-jYwbo8-qeZLRe-n8x6Xn-dzq2Ws-68DxGi-bnmwjN-c4DxV7-kF39se-nBKtjx-7YLgdX-apPuvi-bzS2Rs-rXJWT4-q1DhYc-a2c9kr-omPwVL-aPGmhK-ziBGRr-jY9diK-mDTbpD-jzSaXQ-cuCWwN-9HvHVt-dBPTZV-odzeYC-8u4yuW-oEDGkL-bTygzn-rhtanH-oRNMGp-oXpW1i-s4Jdat-p8N1RJ-fhpghZ-dX2tPC-v8R2LX-x7M7j1-nqZDVD-xFACNe-cAWLSf-A6FvqE-adcNyU-t2N6Hh",
+             "lat": 0,
+             "lng": 0,
+             "address":"",
+             "rating":0,
+             "tags":[{"tag_name":"car"},{"tag_name":"trees"}]
+            },
+            {"title":"Another great beach",
+             "description": "This spot is so beachy!",
+             "image_url":"https://www.flickr.com/photos/cubagallery/15394808204/in/photolist-psoq8E-egFieW-cErZvb-bk5B6i-9uvyPr-7TD5uZ-jYwbo8-qeZLRe-n8x6Xn-dzq2Ws-68DxGi-bnmwjN-c4DxV7-kF39se-nBKtjx-7YLgdX-apPuvi-bzS2Rs-rXJWT4-q1DhYc-a2c9kr-omPwVL-aPGmhK-ziBGRr-jY9diK-mDTbpD-jzSaXQ-cuCWwN-9HvHVt-dBPTZV-odzeYC-8u4yuW-oEDGkL-bTygzn-rhtanH-oRNMGp-oXpW1i-s4Jdat-p8N1RJ-fhpghZ-dX2tPC-v8R2LX-x7M7j1-nqZDVD-xFACNe-cAWLSf-A6FvqE-adcNyU-t2N6Hh-j1TaxV",
+             "address":"",
+             "rating":0,
+             "tags":[{"tag_name":"cat"},{"tag_name":"park"}]
+            }]
+  }
