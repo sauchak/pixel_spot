@@ -11,3 +11,8 @@ body {
 }
 
 a { color: #00B7FF; }
+
+.Logo{
+  max-width: 50px;
+  max-height: 50px;
+}
