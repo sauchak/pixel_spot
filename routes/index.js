@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+
+var spotsController = require('../controllers/spots');
 // index mounts all routes
 
 module.exports = function(app, passport) {
+
+
+
   app.get('/', function(req, res) {
     console.log(req.user)
       res.render('welcome/index', { user: req.user });
@@ -35,6 +40,9 @@ module.exports = function(app, passport) {
     req.logout();
     res.redirect('/');
   });
+
+  app.get('/spots/new', spotsController.new);
+
 }
 
 function isLoggedIn(req, res, next) {

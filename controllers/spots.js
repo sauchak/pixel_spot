@@ -30,7 +30,12 @@ var show = function(req, res, next) {
   }).select('spots');
 };
 
+var newSpot = function(req, res, next) {
+  res.render('spots/new');
+};
+
 module.exports = {
   index: index,
-  show: show
+  show: show,
+  new: newSpot
 }

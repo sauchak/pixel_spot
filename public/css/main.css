@@ -48,3 +48,36 @@ a { color: #00B7FF; }
 h3 {
   text-align: center;
 }
+
+/* New Spot Form */
+
+.new-spot {
+  border: 1px solid black;
+  padding: 20px 20px 10px 20px;
+  min-width: 400px;
+  /*width: 770px;*/
+  max-width: 770px;
+  margin: 0 auto;
+}
+
+.spot-info input[type="text"] {
+  width: 70%;
+}
+
+.tags,
+.tags label {
+  font-weight: bold;
+}
+
+.tags .col-xs-4 {
+  padding-left: 40px;
+}
+
+.new-spot input[type="submit"] {
+  float: right;
+  position: relative;
+  top: -45px;
+}
+
+/* ******************* */
+
