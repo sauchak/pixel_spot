@@ -6,7 +6,6 @@ ___
    
 # Pixel Spot    
 
-[Pitch Deck]()
-___
+
 [Trello](https://trello.com/b/KkLQVJFb/pixel-spot)
 ___
