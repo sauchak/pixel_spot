@@ -30,6 +30,7 @@ User.remove({}, function(err) {
     if (err) {
       console.log(err);
     } else {
+      console.log(users);
       console.log("Database seeded with " + users.length  + " users.");
       mongoose.disconnect();
     }

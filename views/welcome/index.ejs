@@ -4,14 +4,18 @@
   <$- include('../partials/head') $>
 </head>
 <body>
+
   <$- include('../partials/header', {subHeading: 'Welcome'}) $>
 
-  <main>
-    <ul>
-      <li><a href="/users">Visit the user list.</a></li>
-    </ul>
-  </main>
 
+  <%- include('../partials/header', {subHeading: 'Welcome'}) %>
+
+  <main>
+    <!-- <ul> -->
+      <!-- <li><a href="/users"></a></li> -->
+    <!-- </ul> -->
+  </main>
+<a href="/spots">All Spots</a>
   <$- include('../partials/scripts') $>
 </body>
 </html>

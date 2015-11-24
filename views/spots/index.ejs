@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <$- include('../partials/head') $>
+</head>
+<body>
+
+<$ spots.forEach(function (spot) { $>
+  <$= spot.title $>
+<br>
+  <$ spot.tags.forEach(function (tag) { $>
+    <$= tag.tag_name $><br>
+  <$ }); $>
+
+<$ }); $>
+</body>
+</html>
