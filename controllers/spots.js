@@ -1,10 +1,11 @@
 // Require resource's model(s).
 var User = require("../models/user");
 
+//Show Results from Search Function (finding tags embedded in spots and returning those spots to view)
 var index = function (req, res, next) {
 
   User.find({}, function(error, users){
-    var tagSearch = 'cat';
+    var tagSearch = 'cat'; //route our search parameters to here
     var spots = [];
     users.forEach(function(user) {
       spots = spots.concat(user.spots);
@@ -20,6 +21,16 @@ var index = function (req, res, next) {
   });
 };
 
+var show = function(req, res, next) {
+  User.find({"spots._id":req.params.id}, function(err,spot){
+    var spot = spot[0].spots.filter(function(s){
+      return s._id == req.params.id;
+    });
+      res.render('spots/show', {spot: spot});
+  }).select('spots');
+};
+
 module.exports = {
-  index: index
+  index: index,
+  show: show
 }
