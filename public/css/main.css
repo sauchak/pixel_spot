@@ -36,3 +36,13 @@ a { color: #00B7FF; }
   flex-flow: row nowrap;
   justify-content: space-between;
 }
+
+.landingImage {
+  max-width: 300px;
+  max-height: 300px;
+  padding-top: 103px;
+}
+
+h3 {
+  text-align: center;
+}

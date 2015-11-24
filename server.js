@@ -74,6 +74,10 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// Make this folder accessible from root URL
+
+app.use(express.static("public"));
+
 // Error-handling layer.
 app.use(function(err, req, res, next) {
   // In development, the error handler will print stacktrace.
