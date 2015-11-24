@@ -30,7 +30,26 @@ var show = function(req, res, next) {
   }).select('spots');
 };
 
+var create = function(req, res, next) {
+  console.log('got to POST');
+  User.findById("5653e1e953d4e09f25b9a37f", function(err, user){
+  console.log(user.name);
+    user.spots.push({
+      title: "Kihei Boat Launch",
+      description: "A place for photos",
+      image_url: "https://farm6.staticflickr.com/5466/7059902227_bdea03c7a9_k.jpg",
+      address: "Kihei, HI",
+      rating: 4,
+      tags:[{tag_name:"beach"},{tag_name:"nature"}]
+    });
+    user.save(function(err) {
+      res.render('spots/new');
+    });
+  });
+};
+
 module.exports = {
   index: index,
-  show: show
+  show: show,
+  create: create
 }
