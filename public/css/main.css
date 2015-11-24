@@ -12,7 +12,19 @@ body {
 
 a { color: #00B7FF; }
 
-.Logo{
-  max-width: 50px;
-  max-height: 50px;
+
+/*Navigation Bar Styling*/
+#nav-left {
+  padding-left: 50px;
+}
+
+#nav-center {
+  padding-left: 120px;
+
+}
+
+#nav-right {
+  text-align: center;
+  padding-top: 15px;
+  padding-left: 196px;
 }
