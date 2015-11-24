@@ -14,12 +14,18 @@
       </form>
     </div>
     <div class="col-md-4" id="nav-right">
-        <a href="#">Log-in</a>
+        <$ if (user) { $>
+          <a href="/logout">Logout</a>
+          <$ } else { $>
+          <a href="/auth/google">Login with Google</a>
+          <$ } $>
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="#">Sign-up</a>
     </div>
 </nav>
 </header>
+
+
 
 
 
