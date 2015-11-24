@@ -28,3 +28,11 @@ a { color: #00B7FF; }
   padding-top: 15px;
   padding-left: 196px;
 }
+
+/*Landing Page body styling*/
+
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
