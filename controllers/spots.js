@@ -53,7 +53,7 @@ var create = function(req, res, next) {
 
   userId = req.body.userid;
 
-  User.findById(userId, function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
+  User.findById(userId, function(err, user){
     // if i have time later go back and refactor the regex to be something better cause this one is terrible
     var re = /https:\/\/www\.flickr\.com\/photos\/(.*)/i
     var res = re.exec(flickrUrl)[1].split('/')
@@ -64,7 +64,6 @@ var create = function(req, res, next) {
     rp.get("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + env.FLICKR_KEY + "&photo_id=" + photoId + "&format=json&nojsoncallback=1")
     .then(function(data){
       data = JSON.parse(data);
-      console.log(data)
       // generate url directly to image
       imageUrl = "https://farm" + data.photo.farm + ".staticflickr.com/" + data.photo.server + "/" + photoId + "_" + data.photo.secret + ".jpg";
       // get getlocation using flickr
@@ -75,7 +74,6 @@ var create = function(req, res, next) {
       return rp.get("http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + lat + "&lng=" + lng + "&username=pixelspot")
     })
     .then(function(data){
-      console.log(JSON.parse(data).postalCodes[0].postalCode)
       zipcode = JSON.parse(data).postalCodes[0].postalCode;
 
       user.spots.push({
