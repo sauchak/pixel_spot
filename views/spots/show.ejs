@@ -4,19 +4,42 @@
   <$- include('../partials/head') $>
 </head>
 <body>
-  <h1>text</h1>
+  <$- include('../partials/header', {subHeading: 'Welcome', user: false}) $>
+  <main>
 
-  <$= spot[0].title $>
-  <br>
-  <$= spot[0].description $>
-  <br>
-  <img src="<$= spot[0].image_url $>" >
-  <br>
-  <$= spot[0].address $>
-  <br>
-  <$= spot[0].rating $>
-  <br>
-  <$= spot[0].tags $>
-  <br>
+      <div class="showContainer">
+
+        <div id="mainImage">
+            <img class="showImage" src="/images/bench-nature.jpg" /> <!-- <$= spot[0].image_url $> > -->
+        </div>
+
+        <div class="imageDetails">
+          <div id="showDetails">
+            <$= spot[0].title $>
+            <br>
+            <$= spot[0].description $>
+            <br>
+            <$= spot[0].address $>
+            <br>
+            <$= spot[0].rating $>
+            <br>
+            <$ spot[0].tags.forEach(function(tag) {$>
+            <$= tag.tag_name $>
+            <$ }) $>
+            <br>
+          </div>
+
+          <div id="showMap">
+            <img class="showImageMap" src="/images/map.jpeg" />
+          </div>
+        </div>
+      </div>
+  </main>
+
+  <$- include('../partials/scripts') $>
+  <script type="text/javascript">
+
+  </script>
 
 </body>
+</html>
