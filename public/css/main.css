@@ -13,6 +13,16 @@ body {
 
 a { color: #F8F8FF; }
 
+a.like {
+  color: midnightblue;
+  font-size: 20px;
+}
+
+a.like + span.like {
+  color: midnightblue;
+  font-size: 20px;
+}
+
 
 /*Navigation Bar Styling*/
 .navbar-default {
@@ -27,6 +37,7 @@ a { color: #F8F8FF; }
 #logoPin {
   max-height: 48px;
   margin-top: 2px;
+  margin-right: 10px;
   float: left;
   margin-left: 0px;
 }

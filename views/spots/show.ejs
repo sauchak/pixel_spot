@@ -10,20 +10,22 @@
       <div class="showContainer">
 
         <div id="mainImage">
-            <img class="showImage" src="/images/bench-nature.jpg" /> <!-- <$= spot[0].image_url $> > -->
+            <img class="showImage" src="/images/bench-nature.jpg" /> <!-- <$= spot.image_url $> > -->
         </div>
 
         <div class="imageDetails">
           <div id="showDetails">
-            <$= spot[0].title $>
+            <$= spot.title $>
             <br>
-            <$= spot[0].description $>
+            <$= spot.description $>
             <br>
-            <$= spot[0].address $>
+            <$= spot.address $>
             <br>
-            <$= spot[0].rating $>
+            <a href="/spots/<$= spot._id $>/downvote" class="like"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
+            &nbsp;&nbsp;<span class="like"><$= spot.rating $></span>&nbsp;&nbsp;
+            <a href="/spots/<$= spot._id $>/upvote" class="like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
             <br>
-            <$ spot[0].tags.forEach(function(tag) {$>
+            <$ spot.tags.forEach(function(tag) {$>
             <$= tag.tag_name $>
             <$ }) $>
             <br>
