@@ -1,6 +1,9 @@
-![] (https://i.imgur.com/b5dE4BB.png)
-
 <h1 style="text-align:center;">Pixel Spot</h1>
+
+<p align="center">
+<img src="https://i.imgur.com/wodL1a6.png" width="75px"/>
+</p>
+<h1 align=center>Pixel Spot</h1>
 
 Pixel Spot is a crowd sourced photo location scouting app.  Photographers of any skill level can use this app to  search and share their favorite photo locations with others.  Using Flickr's photo hosting and geo-tagging features in conjunction with Google Maps geo-location function users can find the exact spots of amazing photo locations.  Searching for a spot is  made easy with our built in tag fields as well as giving users the ability to create custom tags.  And, of course, users can also search by location.  If you have a photo shoot coming up find your next shot on Pixel Spot!
 
@@ -57,7 +60,11 @@ ___
 
 ###Development Process
 
-![] (https://i.imgur.com/z40rtWL.png =150x)
+<p align="center">
+<img src="https://i.imgur.com/z40rtWL.png" width="150px"/>
+</p>
+
+
 
 The Wayne Enterprises team consists of General Assembly students enrolled in the Web Development Immersive program (also known as WDI-DTLA-6).  The team was selected by the program's instructors and we were given a few days to discuss potential app ideas before the sprint week started.  We decided to make Pixel Spot because we felt it was an app that had immediate real world application and we could meet our project's requirements by:
 
