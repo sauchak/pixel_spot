@@ -1,7 +1,7 @@
 // Require resource's model(s).
 var User = require("../models/user");
 var rp = require("request-promise");
-var env     = require('../config/environment');
+var env = require('../config/environment');
 
 //Show Results from Search Function (finding tags embedded in spots and returning those spots to view)
 var index = function (req, res, next) {
@@ -96,6 +96,23 @@ var create = function(req, res, next) {
   });
 };
 
+// Edit a spot
+var update = function(req, res, next) {
+  User.findById('5653c7b93590504c2c1e8dd0', function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
+    var spotId = req.params.id
+    var spot = user.spots.id(spotId)
+        spot.title = req.body.title,
+        spot.description = req.body.description,
+        spot.image_url = req.body.image_url,
+        spot.address = req.body.address,
+        spot.rating = 0,
+        spot.tags = req.body.tags;
+    user.save(function(err, user) {
+      res.render('welcome/index');
+    });
+  });
+};
+
 //Delete a new spot
 var destroy = function(req, res) {
   spotId = req.params.id;
@@ -103,30 +120,6 @@ var destroy = function(req, res) {
     user[0].spots.id(spotId).remove();
     user[0].save(function(err){
       res.render('welcome/index');
-    });
-  });
-};
-
-var update = function(req, res, next) {
-  User.findById('5653c7b93590504c2c1e8dd0', function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
-    var title = req.body.title,
-        description = req.body.description,
-        image_url = req.body.image_url,
-        address = req.body.address,
-        rating = 0,
-        tags = req.body.tags;
-    console.log(req.body);
-    user.spots.push({
-      title: title,
-      description: description,
-      image_url: image_url,
-      address: address,
-      rating: rating,
-      tags: {tag_name: tags} //need logic on how to insert multiple tags data into tagSchema
-    });
-    user.update(function(err, user) {
-    console.log("doooo doooooo")
-      res.render('spots/show');
     });
   });
 };
