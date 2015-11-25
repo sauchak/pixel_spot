@@ -8,6 +8,7 @@ body {
 body {
   font-size: 14px;
   padding: 50px;
+  background-color:
 }
 
 a { color: #00B7FF; }
@@ -107,6 +108,7 @@ h3 {
 }
 
 .showMap {
+  padding-right: 10px;
   float: right;
 }
 
