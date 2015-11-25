@@ -1,4 +1,4 @@
-![Pixel Spot](https://i.imgur.com/wodL1a6.png =75x)
+![Pixel Spot] (https://i.imgur.com/wodL1a6.png =75x)
 
 <h1 style="text-align:center;">Pixel Spot</h1>
 
@@ -57,7 +57,7 @@ ___
 
 ###Development Process
 
-->![Wayne](https://i.imgur.com/z40rtWL.png =150x)<-
+![Wayne] (https://i.imgur.com/z40rtWL.png =150x)
 
 The Wayne Enterprises team consists of General Assembly students enrolled in the Web Development Immersive program (also known as WDI-DTLA-6).  The team was selected by the program's instructors and we were given a few days to discuss potential app ideas before the sprint week started.  We decided to make Pixel Spot because we felt it was an app that had immediate real world application and we could meet our project's requirements by:
 
