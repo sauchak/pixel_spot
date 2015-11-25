@@ -21,6 +21,7 @@ var index = function (req, res, next) {
   });
 };
 
+//Show one spot
 var show = function(req, res, next) {
   User.find({"spots._id":req.params.id}, function(err,spot){
     var spot = spot[0].spots.filter(function(s){
@@ -30,17 +31,25 @@ var show = function(req, res, next) {
   }).select('spots');
 };
 
+//Create a new spot
 var create = function(req, res, next) {
   console.log('got to POST');
-  User.findById("5653e1e953d4e09f25b9a37f", function(err, user){
+  User.findById("5653e1e953d4e09f25b9a37f", function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
   console.log(user.name);
+    var title = req.body.title,
+        description = req.body.description,
+        image_url = req.body.image_url,
+        address = req.body.address,
+        rating = 0,
+        tags = req.body.tags;
+    console.log(req.body);
     user.spots.push({
-      title: "Kihei Boat Launch",
-      description: "A place for photos",
-      image_url: "https://farm6.staticflickr.com/5466/7059902227_bdea03c7a9_k.jpg",
-      address: "Kihei, HI",
-      rating: 4,
-      tags:[{tag_name:"beach"},{tag_name:"nature"}]
+      title: title,
+      description: description,
+      image_url: image_url,
+      address: address,
+      rating: rating,
+      tags: [{tag_name: tags}] //need logic on how to insert tag data into tagSchema
     });
     user.save(function(err) {
       res.render('spots/new');
