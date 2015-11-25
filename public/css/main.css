@@ -82,8 +82,34 @@ h3 {
 /*Show page styling with map and advanced image details*/
 
 .showContainer {
-  border: 1px;
+  width: 960px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px;
+
 }
+
+.showContainer .showImage {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.imageDetails {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.imageDetails #showDetails {
+  width: 60%;
+  float: left;
+}
+
+.showMap {
+  float: right;
+}
+
 
 /* ******************* */
 
