@@ -50,7 +50,7 @@ var create = function(req, res, next) {
 
   var self = res;
 
-  userId="5654ddeaba55b7c38f23f9ef"
+  userId = req.body.userid;
 
   User.findById(userId, function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
     // if i have time later go back and refactor the regex to be something better cause this one is terrible
