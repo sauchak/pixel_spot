@@ -38,6 +38,7 @@ var newSpot = function(req, res, next) {
   res.render('spots/new');
 };
 
+
 //Create a new spot
 var create = function(req, res, next) {
 
