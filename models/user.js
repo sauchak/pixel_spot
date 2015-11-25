@@ -9,8 +9,12 @@ var tagSchema = new mongoose.Schema({
 var spotSchema = new mongoose.Schema({
   title:   String,
   description: String,
+  flickr_url: String,
   image_url: String,
+  lat: Number,
+  lng: Number,
   address: String,
+  zipcode: String,
   rating: Number,
   tags: [tagSchema]
 });
