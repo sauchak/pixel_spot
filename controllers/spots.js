@@ -64,9 +64,7 @@ var create = function(req, res, next) {
 };
 
 var update = function(req, res, next) {
-  console.log('let us edit');
   User.findById('5653c7b93590504c2c1e8dd0', function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
-  console.log(user.name);
     var title = req.body.title,
         description = req.body.description,
         image_url = req.body.image_url,
@@ -82,10 +80,9 @@ var update = function(req, res, next) {
       rating: rating,
       tags: {tag_name: tags} //need logic on how to insert multiple tags data into tagSchema
     });
-    user.set(req.body)
-    user.save(function(err, user) {
+    user.update(function(err, user) {
     console.log("doooo doooooo")
-      res.render('/');
+      res.render('spots/show');
     });
   });
 };
