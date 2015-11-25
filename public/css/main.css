@@ -8,11 +8,10 @@ body {
 body {
   font-size: 14px;
   padding: 50px;
-  background-color:
+  background-color: #F5F5F5;
 }
 
 a { color: #F8F8FF; }
-
 
 
 a.like {
@@ -54,7 +53,7 @@ a.like + span.like {
 }
 
 #nav-right {
-  text-align: center;
+  text-align: right;
   padding-top: 15px;
   padding-left: 196px;
   font-size: 15px;
@@ -76,6 +75,10 @@ a.like + span.like {
   padding-top: 103px;
 }
 
+#left {
+  background-color:;
+}
+
 h3 {
   text-align: center;
 }
@@ -89,6 +92,8 @@ h3 {
   /*width: 770px;*/
   max-width: 770px;
   margin: 0 auto;
+  margin-top: 90px;
+  background-color: #FFFFFF;
 }
 
 .spot-info input[type="text"] {
@@ -108,6 +113,7 @@ h3 {
   float: right;
   position: relative;
   top: -45px;
+  background-color: midnightblue;
 }
 
 /*Show page styling with map and advanced image details*/
@@ -117,6 +123,7 @@ h3 {
   text-align: center;
   margin: 0 auto;
   margin-top: 50px;
+  background-color: #FFFFFF;
 
 }
 
