@@ -8,6 +8,7 @@ body {
 body {
   font-size: 14px;
   padding: 50px;
+  background-color:
 }
 
 a { color: #00B7FF; }
@@ -29,7 +30,9 @@ a { color: #00B7FF; }
   padding-left: 196px;
 }
 
-/*Landing Page body styling*/
+
+/*Welcome page styling*/
+
 
 .container {
   display: flex;
@@ -76,6 +79,39 @@ h3 {
   position: relative;
   top: -45px;
 }
+
+/*Show page styling with map and advanced image details*/
+
+.showContainer {
+  width: 960px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px;
+
+}
+
+.showContainer .showImage {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.imageDetails {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.imageDetails #showDetails {
+  width: 60%;
+  float: left;
+}
+
+.showMap {
+  padding-right: 10px;
+  float: right;
+}
+
 
 /* ******************* */
 
