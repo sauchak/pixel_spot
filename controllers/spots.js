@@ -63,10 +63,21 @@ var create = function(req, res, next) {
 
 };
 
+var destroy = function(req, res) {
+  User.findById("5653e1e953d4e09f25b9a37f", function(err, user) { //user id is hardcoded to run in Postman, change to req.user.id later
+    user.spots.id(req.params.id).remove();
+    user.save(function(err) {
+      console.log("render");
+      res.render('welcome/index');
+    });
+  });
+};
+
 module.exports = {
   index: index,
   show: show,
   create: create,
+  destroy: destroy,
   new: newSpot
 }
 
