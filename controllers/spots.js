@@ -25,12 +25,22 @@ var index = function (req, res, next) {
 
 //Show one spot
 var show = function(req, res, next) {
-  User.find({"spots._id":req.params.id}, function(err,users){
-    var spot = users[0].spots.filter(function(s){
+  User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
+    var spots = user.spots.filter(function(s){
       return s._id == req.params.id;
     });
-      res.render('spots/show', {spot: spot});
-  }).select('spots');
+    res.render('spots/show', {spot: spots[0]});
+  });
+};
+
+//Upvote a spot
+var upvote = function(req, res, next) {
+  changeVote(req, res, 1);
+};
+
+//Downvote a spot
+var downvote = function(req, res, next) {
+  changeVote(req, res, -1);
 };
 
 
@@ -126,10 +136,24 @@ var destroy = function(req, res) {
 module.exports = {
   index: index,
   show: show,
+  upvote: upvote,
+  downvote: downvote,
   create: create,
   new: newSpot,
   update: update,
   destroy: destroy
+}
+
+function changeVote(req, res, count) {
+  User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
+    var spots = user.spots.filter(function(s){
+      return s._id == req.params.id;
+    });
+    spots[0].rating += count;
+    user.save(function(err) {
+      res.redirect('/spots/' + spots[0]._id);
+    });
+  });
 }
 
 
