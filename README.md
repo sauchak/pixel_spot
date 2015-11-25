@@ -1,4 +1,4 @@
-->![Pixel Spot](https://i.imgur.com/wodL1a6.png =75x)<-
+![Pixel Spot](https://i.imgur.com/wodL1a6.png =75x)
 
 <h1 style="text-align:center;">Pixel Spot</h1>
 
