@@ -11,12 +11,28 @@ body {
   background-color:
 }
 
-a { color: #00B7FF; }
+a { color: #F8F8FF; }
 
 
 /*Navigation Bar Styling*/
+.navbar-default {
+  background-color: midnightblue;
+}
+
+#navLinks {
+  color: white;
+  font-size: 15px;
+}
+
+#logoPin {
+  max-height: 48px;
+  margin-top: 2px;
+  float: left;
+  margin-left: 0px;
+}
+
 #nav-left {
-  padding-left: 50px;
+  padding-left: 30px;
 }
 
 #nav-center {
@@ -28,6 +44,7 @@ a { color: #00B7FF; }
   text-align: center;
   padding-top: 15px;
   padding-left: 196px;
+  font-size: 15px;
 }
 
 
