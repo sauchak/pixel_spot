@@ -4,7 +4,7 @@
   <$- include('../partials/head') $>
 </head>
 <body>
-  <$- include('../partials/header', {subHeaing: 'Welcome'}) $>
+  <$- include('../partials/header', {subHeading: 'Welcome', user: false}) $>
   <main>
     <h1>text</h1>
 
@@ -12,7 +12,7 @@
 
         <div id="mainImage">
           <h3>Image title</h3>
-            <img class="showImage" src="images/bench-nature.jpg" /> <!-- <$= spot[0].image_url $> > -->
+            <img class="showImage" src="/images/bench-nature.jpg" /> <!-- <$= spot[0].image_url $> > -->
         </div>
 
         <div id="showDetails">
@@ -20,7 +20,7 @@
           <br>
           <$= spot[0].description $>
           <br>
-          <img src="<$= spot[0].image_url $>" >
+          <!-- <img src="/images/bench-nature.jpg" /> -->
           <br>
           <$= spot[0].address $>
           <br>
@@ -31,7 +31,7 @@
         </div>
 
         <div id="showMap">
-          <img class="showImageMap" src="images/map.jpg" />
+          <img class="showImageMap" src="/images/map.jpeg" />
         </div>
 
       </div>
