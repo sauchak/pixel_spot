@@ -79,5 +79,11 @@ h3 {
   top: -45px;
 }
 
+/*Show page styling with map and advanced image details*/
+
+.showContainer {
+  border: 1px;
+}
+
 /* ******************* */
 
