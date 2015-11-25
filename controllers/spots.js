@@ -60,11 +60,11 @@ var create = function(req, res, next) {
       tags = req.body.tags;
 
   var self = res;
-
+  // TODO (Wayne) CHANGE THIS BEFORE GOING INTO PRODUCTION -- TESTING ONLY!!!
   userId = req.body.userid;
 
   User.findById(userId, function(err, user){
-    // if i have time later go back and refactor the regex to be something better cause this one is terrible
+    // FIXME | CHANGE VARIABLE NAMES if i have time later go back and refactor the regex to be something better cause this one is terrible
     var re = /https:\/\/www\.flickr\.com\/photos\/(.*)/i
     var res = re.exec(flickrUrl)[1].split('/')
 
@@ -107,7 +107,7 @@ var create = function(req, res, next) {
 
 // Edit a spot
 var update = function(req, res, next) {
-  User.findById('5653c7b93590504c2c1e8dd0', function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
+  User.findById(userId, function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
     var spotId = req.params.id
     var spot = user.spots.id(spotId)
         spot.title = req.body.title,
