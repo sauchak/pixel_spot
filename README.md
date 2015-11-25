@@ -1,4 +1,4 @@
-![] (https://i.imgur.com/wodL1a6.png =75x)
+![] (https://i.imgur.com/b5dE4BB.png)
 
 <h1 style="text-align:center;">Pixel Spot</h1>
 
