@@ -49,7 +49,7 @@ var create = function(req, res, next) {
       image_url: image_url,
       address: address,
       rating: rating,
-      tags: [{tag_name: tags}] //need logic on how to insert tag data into tagSchema
+      tags: {tag_name: tags} //need logic on how to insert multiple tags data into tagSchema
     });
     user.save(function(err) {
       res.render('spots/new');
