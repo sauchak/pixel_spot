@@ -108,7 +108,7 @@ var update = function(req, res, next) {
         spot.rating = 0,
         spot.tags = req.body.tags;
     user.save(function(err, user) {
-      res.render('welcome/index');
+      res.render('welcome/index'); // fix the routes because only welcome index
     });
   });
 };
@@ -119,7 +119,7 @@ var destroy = function(req, res) {
   User.find({"spots._id":spotId}, function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
     user[0].spots.id(spotId).remove();
     user[0].save(function(err){
-      res.render('welcome/index');
+      res.render('welcome/index'); // fix the routes because only welcome index
     });
   });
 };
