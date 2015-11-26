@@ -132,6 +132,25 @@ var destroy = function(req, res) {
     });
   });
 };
+//search view and paths//
+var search = function (req, res, next) {
+
+  User.find({}, function(error, users){
+    var tagSearch = 'cat'; //route our search parameters to here
+    var spots = [];
+    users.forEach(function(user) {
+      spots = spots.concat(user.spots);
+    });
+    spots = spots.filter(function(spot) {
+      var found = false;
+      spot.tags.forEach(function(tag) {
+        if (tag.tag_name === tagSearch) found = true;
+      });
+      return found;
+    });
+    res.render('spots/search', {spots: spots});
+  });
+};
 
 module.exports = {
   index: index,
@@ -141,8 +160,9 @@ module.exports = {
   create: create,
   new: newSpot,
   update: update,
-  destroy: destroy
-}
+  destroy: destroy,
+  search: search
+};
 
 function changeVote(req, res, count) {
   User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){

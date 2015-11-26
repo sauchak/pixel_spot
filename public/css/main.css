@@ -2,16 +2,17 @@
 html,
 body {
   box-sizing: border-box;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 body {
   font-size: 14px;
   padding: 50px;
-  background-color:
+  background-color: #F5F5F5;
 }
 
 a { color: #F8F8FF; }
+
 
 a.like {
   color: midnightblue;
@@ -52,7 +53,7 @@ a.like + span.like {
 }
 
 #nav-right {
-  text-align: center;
+  text-align: right;
   padding-top: 15px;
   padding-left: 196px;
   font-size: 15px;
@@ -74,6 +75,10 @@ a.like + span.like {
   padding-top: 103px;
 }
 
+#left {
+  background-color:;
+}
+
 h3 {
   text-align: center;
 }
@@ -87,6 +92,8 @@ h3 {
   /*width: 770px;*/
   max-width: 770px;
   margin: 0 auto;
+  margin-top: 90px;
+  background-color: #FFFFFF;
 }
 
 .spot-info input[type="text"] {
@@ -106,6 +113,57 @@ h3 {
   float: right;
   position: relative;
   top: -45px;
+  background-color: midnightblue;
+}
+
+/*Search view styling*/
+
+.searchForm {
+  border: 1px solid black;
+  padding: 20px 20px 10px 20px;
+  min-width: 400px;
+  /*width: 770px;*/
+  max-width: 770px;
+  margin: 0 auto;
+  margin-top: 90px;
+  background-color: #FFFFFF;
+}
+
+.search-info input[type="text"] {
+  width: 70%;
+}
+
+.tags,
+.tags label {
+  font-weight: bold;
+}
+
+.tags .col-xs-4 {
+  padding-left: 40px;
+}
+
+.search input[type="submit"] {
+  float: right;
+  position: relative;
+  top: -45px;
+  background-color: midnightblue;
+}
+
+.results {
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px 20px 10px 20px;
+  min-width: 400px;
+  max-width: 770px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: #FFFFFF;
+}
+
+p.results {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 /*Show page styling with map and advanced image details*/
@@ -115,6 +173,7 @@ h3 {
   text-align: center;
   margin: 0 auto;
   margin-top: 50px;
+  background-color: #FFFFFF;
 
 }
 
@@ -142,4 +201,44 @@ h3 {
 
 
 /* ******************* */
+/*User Profile */
+
+.userImage {
+  float: left;
+  margin: 20px;
+  max-width: 60%;
+}
+
+.box {
+  text-align: center;
+}
+
+.boxContent {
+  margin-right: 10px;
+/*  font-family: 'Josefin Sans', sans-serif;*/
+  font-weight: bold;
+}
+
+#profileImage {
+  max-height: 70%;
+  max-width: 80%;
+}
+
+#userName {
+  text-align: center;
+/*  font-family: 'Josefin Sans', sans-serif;*/
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+#title{
+  padding-top: 24px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#description {
+  padding-top: 20px;
+}
 
