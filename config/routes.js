@@ -39,13 +39,13 @@ module.exports = function(app, passport) {
   // spots resource paths:
   router.get('/spots', spotsController.index); // to show spots search results
   router.get('/spots/:id', spotsController.show); // to show one spot
-  router.post('/userid/spot', spotsController.create); // create a new spot
+  router.post('/spots/new', spotsController.create); // create a new spot
   router.get('/spots/:id/upvote', spotsController.upvote); // to show one spot
   router.get('/spots/:id/downvote', spotsController.downvote); // to show one spot
   router.get('/spots/search/all', spotsController.search);
-  // router.put('/userid/spot/:id', spotsController.update); // to edit a spot
-  // router.get('/:userid/spots', spotsController.spotsforuser); // to show all of a user's spots
-  router.delete('/userid/spot/:id', spotsController.destroy); // to delete a spot
+  router.put('/spots/:id', spotsController.update); // to edit a spot
+  router.delete('/spots/:id', spotsController.destroy); // to delete a spot
+
 
   app.use('/',router)
 }
