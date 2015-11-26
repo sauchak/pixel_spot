@@ -28,7 +28,6 @@ module.exports = function(app, passport) {
     res.redirect('/');
   });
 
-
   // root path:
   router.get('/', welcomeController.index);
 
