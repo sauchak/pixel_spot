@@ -25,12 +25,22 @@ var index = function (req, res, next) {
 
 //Show one spot
 var show = function(req, res, next) {
-  User.find({"spots._id":req.params.id}, function(err,users){
-    var spot = users[0].spots.filter(function(s){
+  User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
+    var spots = user.spots.filter(function(s){
       return s._id == req.params.id;
     });
-      res.render('spots/show', {spot: spot});
-  }).select('spots');
+    res.render('spots/show', {spot: spots[0]});
+  });
+};
+
+//Upvote a spot
+var upvote = function(req, res, next) {
+  changeVote(req, res, 1);
+};
+
+//Downvote a spot
+var downvote = function(req, res, next) {
+  changeVote(req, res, -1);
 };
 
 
@@ -50,11 +60,11 @@ var create = function(req, res, next) {
       tags = req.body.tags;
 
   var self = res;
-
+  // TODO (Wayne) CHANGE THIS BEFORE GOING INTO PRODUCTION -- TESTING ONLY!!!
   userId = req.body.userid;
 
   User.findById(userId, function(err, user){
-    // if i have time later go back and refactor the regex to be something better cause this one is terrible
+    // FIXME | CHANGE VARIABLE NAMES if i have time later go back and refactor the regex to be something better cause this one is terrible
     var re = /https:\/\/www\.flickr\.com\/photos\/(.*)/i
     var res = re.exec(flickrUrl)[1].split('/')
 
@@ -97,7 +107,7 @@ var create = function(req, res, next) {
 
 // Edit a spot
 var update = function(req, res, next) {
-  User.findById('5653c7b93590504c2c1e8dd0', function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
+  User.findById(userId, function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
     var spotId = req.params.id
     var spot = user.spots.id(spotId)
         spot.title = req.body.title,
@@ -126,10 +136,24 @@ var destroy = function(req, res) {
 module.exports = {
   index: index,
   show: show,
+  upvote: upvote,
+  downvote: downvote,
   create: create,
   new: newSpot,
   update: update,
   destroy: destroy
+}
+
+function changeVote(req, res, count) {
+  User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
+    var spots = user.spots.filter(function(s){
+      return s._id == req.params.id;
+    });
+    spots[0].rating += count;
+    user.save(function(err) {
+      res.redirect('/spots/' + spots[0]._id);
+    });
+  });
 }
 
 

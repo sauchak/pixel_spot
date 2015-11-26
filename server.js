@@ -58,14 +58,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./config/passport')(passport);
 
 // index mounts all routes
-require('./routes/index')(app, passport);
+require('./config/routes')(app, passport);
 
 // Useful for debugging the state of requests.
 app.use(debugReq);
-
-// Defines all of our "dynamic" routes.
-app.use('/', routes);
-
 
 // Catches all 404 routes.
 app.use(function(req, res, next) {
