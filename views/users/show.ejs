@@ -6,34 +6,20 @@
 <body>
   <$- include('../partials/header', { subHeading: user.name + "'s Profile" }) $>
 
-  <main>
-
-    <p>Name:   <$= user.name $></p>
-    <p>Handle: <$= user.handle $></p>
-
-    <div class="showContainer">
-
-      <div id="mainImage">
-          <img class="showImage" src="/images/bench-nature.jpg" />
+<main>
+  <div  id="userName">
+   <p> <$= otherUser.name $> Spots!</p>
+  </div>
+    <div class="container box">
+      <$ otherUser.spots.forEach(function(spot) { $>
+      <div class="col-md-4 panel panel-default space center-block boxContent">
+        <p id="title"><$= spot.title$></p>
+        <img id="profileImage" src="<$= spot.image_url $>">
+        <p id="description">"<$= spot.description$>"</p>
       </div>
-
-      <div class="imageDetails">
-        <div id="showDetails">
-          <$= user.name $>
-          <$= user.spots[0].description$>
-          <$= user.spots[0]$>
-
-
-          <br>
-        </div>
-
-        <div id="showMap">
-          <img class="showImageMap" src="/images/map.jpeg" />
-        </div>
-      </div>
+      <$ }); $>
     </div>
-
-  </main>
+</main>
 
   <$- include('../partials/scripts') $>
 </body>
