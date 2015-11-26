@@ -162,7 +162,8 @@ h3 {
 
 p.results {
   text-align: center;
-  font-style: bold;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 /*Show page styling with map and advanced image details*/
