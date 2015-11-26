@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <$- include('../partials/head') $>
+</head>
+<body>
+  <$- include('../partials/header', {subHeading: 'Welcome', user: false}) $>
+  <$ spots.forEach(function(spot){ $>
+    <$ spot.tags.forEach(function(tag){ $>
+      <$= tag.tag_name $><br>
+    <$ }) $>
+    <br>
+  <$ }) $>
+</body>
+</html>

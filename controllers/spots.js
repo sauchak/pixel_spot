@@ -2,6 +2,7 @@
 var User = require("../models/user");
 var rp = require("request-promise");
 var env = require('../config/environment');
+var _ = require("underscore");
 
 //Show Results from Search Function (finding tags embedded in spots and returning those spots to view)
 var index = function (req, res, next) {
@@ -132,10 +133,13 @@ var destroy = function(req, res) {
     });
   });
 };
+
 //search view and paths//
 var search = function (req, res, next) {
 
-  User.find({}, function(error, users){
+  tagList = ["forest","cat","beach"];
+
+  User.find({"spots.tags.tag_name":{"$in":tagList}}, function(error, users){
     var tagSearch = 'cat'; //route our search parameters to here
     var spots = [];
     users.forEach(function(user) {
@@ -144,12 +148,14 @@ var search = function (req, res, next) {
     spots = spots.filter(function(spot) {
       var found = false;
       spot.tags.forEach(function(tag) {
-        if (tag.tag_name === tagSearch) found = true;
+//        if (tag.tag_name === tagSearch) found = true;
+        if (tagList.indexOf(tag.tag_name) >= 0) found = true;
       });
       return found;
     });
-    res.render('spots/search', {spots: spots});
+    res.render('spots/test', {spots:spots})
   });
+
 };
 
 module.exports = {
