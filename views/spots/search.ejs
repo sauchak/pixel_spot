@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <$- include('../partials/head') $>
+</head>
+
+<body>
+<$- include('../partials/header', {subHeading: 'Welcome'}) $>
+  <main>
+    <div class="searchForm">
+      <form id="new-search-form" class="form search-spot">
+
+
+        <fieldset class="form-group row tags">
+          <div class="col-xs-12">
+            <p>Please select the appropriate tags:</p>
+          </div>
+          <div class="col-xs-4">
+            <label class="checkbox-inline">
+              <input name="tags" type="checkbox" value="Nature">Nature
+            </label><br>
+            <label class="checkbox-inline">
+              <input name="tags" type="checkbox" value="Urban">Urban
+            </label><br>
+            <label class="checkbox-inline">
+              <input name="tags" type="checkbox" value="Family">Family
+            </label><br>
+          </div>
+
+          <div class="col-xs-4">
+            <label class="checkbox-inline">
+              <input name="tags" type="checkbox" value="Beach">Beach
+            </label><br>
+            <label class="checkbox-inline">
+              <input name="tags" type="checkbox" value="Park">Park
+            </label><br>
+            <label class="checkbox-inline">
+              <input name="tags" type="checkbox" value="Engagement">Engagement
+            </label><br>
+          </div>
+
+          <div class="col-xs-4">
+            <label class="checkbox-inline">
+              <input name="tags" type="checkbox" value="Garden">Garden
+            </label><br>
+            <label class="checkbox-inline">
+              <input name="tags" type="checkbox" value="Museum">Museum
+            </label><br>
+            <label class="checkbox-inline">
+              <input name="tags" type="checkbox" value="Wedding">Wedding
+            </label><br>
+          </div>
+        </fieldset>
+
+        <br>
+
+        <fieldset class="form-group row search-info">
+          <label for="additional-tags" class="col-xs-4 form-control-label">Additional tags:</label>
+          <div class="col-xs-8">
+            <input id="additional-tags" name="additional-tags" type="text">
+          </div>
+
+          <label for="location" class="col-xs-4 form-control-label">Search locations:</label>
+          <div class="col-xs-8">
+            <input id="location" name="location" type="text">
+          </div>
+        </fieldset>
+
+        <input type="submit" class="btn btn-primary">
+      </form>
+    </div>
+  </main>
+
+
+    <div class="results">
+        <p>Search results</p>
+          <$ spots.forEach(function(spot) {$>
+          <br>
+          <$= spot.title $>
+          <br>
+          <$= spot.description $>
+          <br>
+          <$= spot.address $>
+          <$ }) $>
+    </div>
+
+  <$- include('../partials/scripts') $>
+    <script type="text/javascript">
+  //   $(document).ready(function() {
+  //     $newSearchForm = $('#new-search-form');
+  //     $newSearchForm.on('submit', function(e) {
+  //       e.preventDefault();
+  //       var formData = $(e.target).serializeArray();
+
+  //       console.log(formData);
+  //       // AJAX call and close modal
+  //     });
+  //   });
+  // </script>
+
+</body>
+
+</html>
