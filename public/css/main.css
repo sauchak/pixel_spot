@@ -144,7 +144,7 @@ h3 {
 
 .search input[type="submit"] {
   float: right;
-  position: relative;
+  margin-left: 300px;
   top: -45px;
   background-color: midnightblue;
 }
