@@ -13,12 +13,12 @@ module.exports = function(app, passport) {
   });
 
   app.get('/', function(req, res) {
-    console.log(req.user)
+    console.log(req.user);
       res.render('welcome/index', { user: req.user });
   });
 
   app.get('/users', function(req, res) {
-    console.log(req.user)
+    console.log(req.user);
       res.render('users/index', { user: req.user });
   });
 

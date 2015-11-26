@@ -116,6 +116,55 @@ h3 {
   background-color: midnightblue;
 }
 
+/*Search view styling*/
+
+.searchForm {
+  border: 1px solid black;
+  padding: 20px 20px 10px 20px;
+  min-width: 400px;
+  /*width: 770px;*/
+  max-width: 770px;
+  margin: 0 auto;
+  margin-top: 90px;
+  background-color: #FFFFFF;
+}
+
+.search-info input[type="text"] {
+  width: 70%;
+}
+
+.tags,
+.tags label {
+  font-weight: bold;
+}
+
+.tags .col-xs-4 {
+  padding-left: 40px;
+}
+
+.search input[type="submit"] {
+  float: right;
+  position: relative;
+  top: -45px;
+  background-color: midnightblue;
+}
+
+.results {
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px 20px 10px 20px;
+  min-width: 400px;
+  max-width: 770px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: #FFFFFF;
+}
+
+p.results {
+  text-align: center;
+  font-style: bold;
+}
+
 /*Show page styling with map and advanced image details*/
 
 .showContainer {

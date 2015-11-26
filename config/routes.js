@@ -4,7 +4,7 @@ var express = require('express'),
 // Require controllers.
 var welcomeController = require('../controllers/welcome');
 var usersController   = require('../controllers/users');
-var spotsController   = require('../controllers/spots')
+var spotsController   = require('../controllers/spots');
 
 // root path:
 router.get('/', welcomeController.index);
@@ -20,6 +20,7 @@ router.get('/spots/:id/upvote', spotsController.upvote); // to show one spot
 router.get('/spots/:id/downvote', spotsController.downvote); // to show one spot
 router.post('/spots/new', spotsController.create); // create a new spot
 router.put('/spot/:id', spotsController.update); // to edit a spot
+router.get('/spots/search/all', spotsController.search);
 // router.get('/:userid/spots', spotsController.spotsforuser); // to show all of a user's spots
  router.delete('/spot/:id', spotsController.destroy); // to delete a spot
 
