@@ -8,6 +8,10 @@ var spotsController   = require('../controllers/spots');
 
 
 module.exports = function(app, passport) {
+  app.use(function(req, res, next){
+      res.locals.user = req.user;
+      next();
+    });
   // OAuth route
   router.get('/auth/google', passport.authenticate(
     'google',
@@ -39,6 +43,7 @@ module.exports = function(app, passport) {
   // spots resource paths:
   router.get('/spots', spotsController.index); // to show spots search results
   router.get('/spots/:id', spotsController.show); // to show one spot
+  app.get('/spots/new', spotsController.new); // to show the create page
   router.post('/spots/new', spotsController.create); // create a new spot
   router.get('/spots/:id/upvote', spotsController.upvote); // to show one spot
   router.get('/spots/:id/downvote', spotsController.downvote); // to show one spot
