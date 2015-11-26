@@ -6,29 +6,52 @@ var welcomeController = require('../controllers/welcome');
 var usersController   = require('../controllers/users');
 var spotsController   = require('../controllers/spots');
 
-// root path:
-router.get('/', welcomeController.index);
 
-// users resource paths:
-router.get('/users', usersController.index); // to show a list of users
-router.get('/users/:id', usersController.show); // to show one user
+module.exports = function(app, passport) {
+  app.use(function(req, res, next){
+      res.locals.user = req.user;
+      next();
+    });
+  // OAuth route
+  router.get('/auth/google', passport.authenticate(
+    'google',
+    { scope: ['profile','email'] }
+  ));
 
-// spots resource paths:
-router.get('/spots', spotsController.index); // to show spots search results
-router.get('/spots/:id', spotsController.show); // to show one spot
-router.get('/spots/:id/upvote', spotsController.upvote); // to show one spot
-router.get('/spots/:id/downvote', spotsController.downvote); // to show one spot
-router.post('/spots/new', spotsController.create); // create a new spot
-router.put('/spot/:id', spotsController.update); // to edit a spot
-router.get('/spots/search/all', spotsController.search);
-// router.get('/:userid/spots', spotsController.spotsforuser); // to show all of a user's spots
- router.delete('/spot/:id', spotsController.destroy); // to delete a spot
+  // Google OAuth callback route
+  router.get('/oauth2callback', passport.authenticate(
+    'google',
+    {
+      successRedirect : '/',
+      failureRedirect : '/'
+    }
+  ));
+
+  // OAuth logout
+  router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
+
+  // root path:
+  router.get('/', welcomeController.index);
+
+  // users resource paths:
+  router.get('/users', usersController.index); // to show a list of users
+  router.get('/users/:id', usersController.show); // to show one user
+
+  // spots resource paths:
+  router.get('/spots', spotsController.index); // to show spots search results
+  router.get('/spots/:id', spotsController.show); // to show one spot
+  app.get('/spots/new', spotsController.new); // to show the create page
+  router.post('/spots/new', spotsController.create); // create a new spot
+  router.get('/spots/:id/upvote', spotsController.upvote); // to show one spot
+  router.get('/spots/:id/downvote', spotsController.downvote); // to show one spot
+  router.get('/spots/search/all', spotsController.search);
+  router.put('/spots/:id', spotsController.update); // to edit a spot
+  router.delete('/spots/:id', spotsController.destroy); // to delete a spot
 
 
-module.exports = router;
-
-//Remember to add isLoggedIn to router.post for authenication
-function isLoggedIn(req, res, next) {
-  if ( req.isAuthenticated() ) return next();
-  res.redirect('/auth/google');
+  app.use('/',router)
 }
+
