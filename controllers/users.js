@@ -9,9 +9,9 @@ var index = function(req, res, next){
 };
 
 var show = function(req, res, next){
-  User.findById(req.params.id, function(error, user){
+  User.findById(req.params.id, function(error, otherUser){
     if (error) res.json({message: 'Could not find user because ' + error});
-    res.render('users/show', {user: user});
+    res.render('users/show', {user: req.user, otherUser: otherUser});
   });
 };
 
