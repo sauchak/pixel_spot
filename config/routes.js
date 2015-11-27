@@ -37,7 +37,7 @@ module.exports = function(app, passport) {
   router.get('/', welcomeController.index);
 
   // users resource paths:
-  router.get('/users', usersController.index); // to show a list of users
+//  router.get('/users', usersController.index); // to show a list of users
   router.get('/users/:id', usersController.show); // to show one user
 
   // spots resource paths:
