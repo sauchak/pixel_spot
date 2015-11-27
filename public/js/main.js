@@ -48,5 +48,15 @@ $(document).ready(function() {
     }
   );
 
-})
+  $("#btn-search").on("click", function(evt){
+//    alert($("#input-search").val())
+//    post('/spots/search/all', {tags: $("#input-search").val()});
+console.log("Here")
+    document.location.href="/spots/search/all?tags=" + $("#input-search").val()
+  })
 
+  $("#btn-advanced").on("click", function(evt){
+    alert($("#input-search").val())
+  })
+
+})

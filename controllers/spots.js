@@ -44,11 +44,13 @@ var downvote = function(req, res, next) {
   changeVote(req, res, -1);
 };
 
-
 var newSpot = function(req, res, next) {
   res.render('spots/new');
 };
 
+var findSpot = function(req, res, next) {
+  res.render('spots/search',{spots:""});
+};
 
 //Create a new spot
 var create = function(req, res, next) {
@@ -60,17 +62,17 @@ var create = function(req, res, next) {
       rating = 0,
       tags = req.body.tags;
 
-  var self = res;
+//  var self = res;
   // TODO (Wayne) CHANGE THIS BEFORE GOING INTO PRODUCTION -- TESTING ONLY!!!
   userId = req.body.userid;
 
   User.findById(userId, function(err, user){
     // FIXME | CHANGE VARIABLE NAMES if i have time later go back and refactor the regex to be something better cause this one is terrible
     var re = /https:\/\/www\.flickr\.com\/photos\/(.*)/i
-    var res = re.exec(flickrUrl)[1].split('/')
+    var regexResult = re.exec(flickrUrl)[1].split('/')
 
-    userId = res[0];
-    photoId = res[1];
+    userId = regexResult[0];
+    photoId = regexResult[1];
     // get farm, server, and secret from user, filter on photo id
     rp.get("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + env.FLICKR_KEY + "&photo_id=" + photoId + "&format=json&nojsoncallback=1")
     .then(function(data){
@@ -85,8 +87,8 @@ var create = function(req, res, next) {
       return rp.get("http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + lat + "&lng=" + lng + "&username=pixelspot")
     })
     .then(function(data){
-      zipcode = JSON.parse(data).postalCodes[0].postalCode;
-
+//      zipcode = JSON.parse(data).postalCodes[0].postalCode;
+zipcode = ""
       user.spots.push({
         title: title,
         description: description,
@@ -97,10 +99,10 @@ var create = function(req, res, next) {
         lng: lng,
         zipcode: zipcode,
         rating: rating,
-        tags: {tag_name: tags} //need logic on how to insert multiple tags data into tagSchema
+        tags: {tag_name: "cat"} //need logic on how to insert multiple tags data into tagSchema
       });
       user.save(function(err) {
-        self.render('spots/new');
+        res.render('spots/new');
       });
     })
   });
@@ -136,9 +138,10 @@ var destroy = function(req, res) {
 
 //search view and paths//
 var search = function (req, res, next) {
-
-  tagList = ["forest","cat","beach"];
-
+  tagList = req.query.tags.split(',');
+  console.log(tagList)
+  tagList = _.map(tagList,function(tag) { return tag.trim(); });
+  console.log(tagList)
   User.find({"spots.tags.tag_name":{"$in":tagList}}, function(error, users){
     var spots = [];
     users.forEach(function(user) {
@@ -165,6 +168,7 @@ module.exports = {
   new: newSpot,
   update: update,
   destroy: destroy,
+  find: findSpot,
   search: search
 };
 

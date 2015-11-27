@@ -123,3 +123,5 @@ ___
 
 - We require a specific url pattern to be able to parse the url for the information we need
 - When using geo-location the data doesn't always map exactly back to a specific zipcode.  There's not a one-to-one relationship between lattitude/longitude and zipcodes 
+- user input needs to be sanitized
+- implement a more robust search feature that matches partial results
