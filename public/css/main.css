@@ -243,3 +243,14 @@ p.results {
   padding-top: 20px;
 }
 
+/* spots/index view */
+.indexTemplate {
+
+}
+
+.indexSpotContainer {
+  height: 375px;
+  width: 350px;
+  border: 1px solid black;
+  margin: 5px;
+}

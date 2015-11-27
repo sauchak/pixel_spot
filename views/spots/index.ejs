@@ -3,20 +3,26 @@
 <head>
   <$- include('../partials/head') $>
 </head>
-
 <body>
   <$- include('../partials/header', {subHeading: 'Welcome'}) $>
-  <h2>Spots/Index</h2>
-  <$ spots.forEach(function (spot) { $>
-    <h2><$= spot.title $></h2>
-    <img src=<$= spot.image_url $>>
-    <br />
-  <br>
-    <$ spot.tags.forEach(function (tag) { $>
-      <$= tag.tag_name $>
+  <h2>Search Results</h2>
+  <div class="container box">
+    <$ spots.forEach(function (spot) { $>
+    <div class="indexTemplate">
+      <div class="indexSpotContainer">
+        <h2><$= spot.title $></h2>
+          <img src=<$= spot.image_url $>>
+        <br />
+         <br>
+        <$ spot.tags.forEach(function (tag) { $>
+          <$= tag.tag_name $>
+        <$ }); $>
+        <br />
+      </div>
+    </div>
     <$ }); $>
-  <br />
-  <$ }); $>
+  </div>
+
   <$- include('../partials/scripts') $>
 </body>
 </html>
