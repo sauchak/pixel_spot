@@ -140,7 +140,6 @@ var search = function (req, res, next) {
   tagList = ["forest","cat","beach"];
 
   User.find({"spots.tags.tag_name":{"$in":tagList}}, function(error, users){
-    var tagSearch = 'cat'; //route our search parameters to here
     var spots = [];
     users.forEach(function(user) {
       spots = spots.concat(user.spots);
@@ -148,12 +147,11 @@ var search = function (req, res, next) {
     spots = spots.filter(function(spot) {
       var found = false;
       spot.tags.forEach(function(tag) {
-//        if (tag.tag_name === tagSearch) found = true;
         if (tagList.indexOf(tag.tag_name) >= 0) found = true;
       });
       return found;
     });
-    res.render('spots/test', {spots:spots})
+    res.render('spots/index', {spots:spots})
   });
 
 };
