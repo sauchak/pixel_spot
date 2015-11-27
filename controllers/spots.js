@@ -54,17 +54,25 @@ var findSpot = function(req, res, next) {
 
 //Create a new spot
 var create = function(req, res, next) {
+console.log("get here")
 
   var title = req.body.title,
       description = req.body.description,
-      flickrUrl = req.body.flickr_url,
+      flickrUrl = req.body["flickr-url"],
       address = req.body.address,
       rating = 0,
-      tags = req.body.tags;
+      tags = req.body["additional-tags"];
+
+//[{tag_name:"cat"},{tag_name:"bench"}]
+  tags = tags.split(',');
+  tags = _.map(tags,function(tag) { return {tag_name: tag.trim()}; });
+  console.log(tags)
 
 //  var self = res;
   // TODO (Wayne) CHANGE THIS BEFORE GOING INTO PRODUCTION -- TESTING ONLY!!!
-  userId = req.body.userid;
+//  userId = req.body.userid;
+  userId = res.locals.user._id;
+  address = "";
 
   User.findById(userId, function(err, user){
     // FIXME | CHANGE VARIABLE NAMES if i have time later go back and refactor the regex to be something better cause this one is terrible
@@ -99,7 +107,7 @@ zipcode = ""
         lng: lng,
         zipcode: zipcode,
         rating: rating,
-        tags: {tag_name: "cat"} //need logic on how to insert multiple tags data into tagSchema
+        tags: tags //need logic on how to insert multiple tags data into tagSchema
       });
       user.save(function(err) {
         res.render('spots/new');
@@ -110,7 +118,7 @@ zipcode = ""
 
 // Edit a spot
 var update = function(req, res, next) {
-  User.findById(userId, function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
+  User.findById(userId, function(err, user){
     var spotId = req.params.id
     var spot = user.spots.id(spotId)
         spot.title = req.body.title,
@@ -128,7 +136,7 @@ var update = function(req, res, next) {
 //Delete a new spot
 var destroy = function(req, res) {
   spotId = req.params.id;
-  User.find({"spots._id":spotId}, function(err, user){ //user id is hardcoded to run in Postman, change to req.user.id later
+  User.find({"spots._id":spotId}, function(err, user){
     user[0].spots.id(spotId).remove();
     user[0].save(function(err){
       res.render('welcome/index'); // fix the routes because only welcome index
@@ -136,27 +144,27 @@ var destroy = function(req, res) {
   });
 };
 
-//search view and paths//
+// grabs the data from the search input and redirects to the view page
 var search = function (req, res, next) {
-  tagList = req.query.tags.split(',');
-  console.log(tagList)
-  tagList = _.map(tagList,function(tag) { return tag.trim(); });
-  console.log(tagList)
-  User.find({"spots.tags.tag_name":{"$in":tagList}}, function(error, users){
-    var spots = [];
-    users.forEach(function(user) {
-      spots = spots.concat(user.spots);
-    });
-    spots = spots.filter(function(spot) {
-      var found = false;
-      spot.tags.forEach(function(tag) {
-        if (tagList.indexOf(tag.tag_name) >= 0) found = true;
+  if (req.query.tags)
+  {
+    tagList = req.query.tags.split(',');
+    tagList = _.map(tagList,function(tag) { return tag.trim(); });
+    User.find({"spots.tags.tag_name":{"$in":tagList}}, function(error, users){
+      var spots = [];
+      users.forEach(function(user) {
+        spots = spots.concat(user.spots);
       });
-      return found;
+      spots = spots.filter(function(spot) {
+        var found = false;
+        spot.tags.forEach(function(tag) {
+          if (tagList.indexOf(tag.tag_name) >= 0) found = true;
+        });
+        return found;
+      });
+      res.render('spots/index', {spots:spots})
     });
-    res.render('spots/index', {spots:spots})
-  });
-
+  }
 };
 
 module.exports = {
@@ -183,6 +191,3 @@ function changeVote(req, res, count) {
     });
   });
 }
-
-
-
