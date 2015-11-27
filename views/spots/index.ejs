@@ -3,15 +3,20 @@
 <head>
   <$- include('../partials/head') $>
 </head>
-<body>
-<h2>Spots/Index</h2>
-<$ spots.forEach(function (spot) { $>
-  <$= spot.title $>
-<br>
-  <$ spot.tags.forEach(function (tag) { $>
-    <$= tag.tag_name $><br>
-  <$ }); $>
 
-<$ }); $>
+<body>
+  <$- include('../partials/header', {subHeading: 'Welcome'}) $>
+  <h2>Spots/Index</h2>
+  <$ spots.forEach(function (spot) { $>
+    <h2><$= spot.title $></h2>
+    <img src=<$= spot.image_url $>>
+    <br />
+  <br>
+    <$ spot.tags.forEach(function (tag) { $>
+      <$= tag.tag_name $>
+    <$ }); $>
+  <br />
+  <$ }); $>
+  <$- include('../partials/scripts') $>
 </body>
 </html>

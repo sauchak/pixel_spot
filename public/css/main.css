@@ -79,6 +79,7 @@ a.like + span.like {
   background-color:;
 }
 
+/* TODO this needs to be changed to be more specific to a subset of objects */
 h3 {
   text-align: center;
 }

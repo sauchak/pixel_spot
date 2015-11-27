@@ -44,7 +44,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-
 // mount passport
 app.use(passport.initialize());
 app.use(passport.session());

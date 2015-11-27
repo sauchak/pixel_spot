@@ -66,22 +66,22 @@
           </div>
         </fieldset>
 
-        <input type="submit" class="btn btn-primary">
+        <input type="button" class="btn btn-primary" value="search" id="btn-advanced">
       </form>
     </div>
   </main>
 
 
     <div class="results">
-        <p>Search results</p>
-          <$ spots.forEach(function(spot) {$>
-          <br>
-          <$= spot.title $>
-          <br>
-          <$= spot.description $>
-          <br>
-          <$= spot.address $>
-          <$ }) $>
+      <p>Search results</p>
+      <$ spots.forEach(function(spot) {$>
+      <br>
+      <$= spot.title $>
+      <br>
+      <$= spot.description $>
+      <br>
+      <$= spot.address $>
+      <$ }) $>
     </div>
 
   <$- include('../partials/scripts') $>
