@@ -41,7 +41,6 @@ module.exports = function(app, passport) {
   router.get('/users/:id', usersController.show); // to show one user
 
   // spots resource paths:
-  router.get('/test',spotsController.search);
   router.get('/spots', spotsController.index); // to show spots search results
   router.get('/spots/:id', spotsController.show); // to show one spot
   app.get('/spots/new', spotsController.new); // to show the create page
