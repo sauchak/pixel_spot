@@ -11,12 +11,17 @@
     <div class="indexTemplate">
       <div class="indexSpotContainer">
         <h2><$= spot.title $></h2>
-          <img src=<$= spot.image_url $>>
-        <br />
+          <div>
+          <img class="maxImageWidth" src=<$= spot.image_url $>>
+          </div>
          <br>
-        <$ spot.tags.forEach(function (tag) { $>
-          <$= tag.tag_name $>
-        <$ }); $>
+         <span> Tags:
+          <$ var tagString = "" $>
+          <$ spot.tags.forEach(function (tag) { $>
+            <$ tagString += (tag.tag_name + ", ");$>
+          <$ }); $>
+            <$= tagString.replace(/,\s*$/, ""); $>
+          </span>
         <br />
       </div>
     </div>

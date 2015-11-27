@@ -254,3 +254,7 @@ p.results {
   border: 1px solid black;
   margin: 5px;
 }
+
+.maxImageWidth {
+  max-width: 345px;
+}
