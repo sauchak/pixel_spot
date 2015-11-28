@@ -235,6 +235,7 @@ p.results {
   top: 300px;
 }
 
+
 .post {
   padding-left: 10%;
   text-align: center;
@@ -257,6 +258,18 @@ p.results {
 
 
 /* index views */
+
+#indexView {
+  width: 1080px;
+}
+
+#indexHeader{
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 10px;
+  width: 1080px;
+}
 
 .indexTemplate {
   display:inline-block;
