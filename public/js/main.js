@@ -54,7 +54,26 @@ $(document).ready(function() {
   });
 
   $("#btn-advanced").on("click", function(evt){
-    alert($("#input-search").val())
+    event.preventDefault();
+    var defaultTags = $("[name=tags]:checked").map(function(){
+      return $(this).val();
+    }).get().join();
+
+    $.ajax({
+      url:"http://localhost:3000/spots/search/ajax",
+      method:'GET',
+      dataType: 'json',
+      data: {"tags":defaultTags},
+      context: document.body
+    }).done(
+      function(data){
+        console.log("data is " + data);
+        spots = JSON.parse(data);
+
+        renderedHtmlView = renderLi({tags: spots});
+        $destination.append(renderedHtmlView);
+      }
+    );
   });
 /*
   $("#new-spot-form").on("submit", function(evt){

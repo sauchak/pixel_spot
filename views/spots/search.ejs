@@ -59,44 +59,49 @@
           <div class="col-xs-8">
             <input id="additional-tags" name="additional-tags" type="text">
           </div>
-
+<br><br>
           <label for="location" class="col-xs-4 form-control-label">Search locations:</label>
           <div class="col-xs-8">
             <input id="location" name="location" type="text">
           </div>
         </fieldset>
 
-        <input type="button" class="btn btn-primary" value="search" id="btn-advanced">
+        <input type="button" class="btn btn-primary" value="Search" id="btn-advanced">
       </form>
     </div>
   </main>
 
-
-    <div class="results">
-      <p>Search results</p>
-      <$ spots.forEach(function(spot) {$>
-      <br>
-      <$= spot.title $>
-      <br>
-      <$= spot.description $>
-      <br>
-      <$= spot.address $>
-      <$ }) $>
-    </div>
+  <div class="results" id="spotscontainer">
+    <p>Search results</p>
+    <$ spots.forEach(function (spot) { $>
+      <h2><$= spot.title $></h2>
+      <img src="<$= spot.image_url $>">
+      <br />
+    <br>
+    Tags:
+      <$ spot.tags.forEach(function (tag) { $>
+        <$= tag.tag_name $>
+      <$ }); $>
+    <br />
+    <$ }); $>
+  </div>
 
   <$- include('../partials/scripts') $>
-    <script type="text/javascript">
-  //   $(document).ready(function() {
-  //     $newSearchForm = $('#new-search-form');
-  //     $newSearchForm.on('submit', function(e) {
-  //       e.preventDefault();
-  //       var formData = $(e.target).serializeArray();
 
-  //       console.log(formData);
-  //       // AJAX call and close modal
-  //     });
-  //   });
-  // </script>
+  <script type="text/template" id="spot-template">
+    <p>Search results</p>
+    <% _.forEach(spots,function (spot) { %>
+      <h2><%= spot.title %></h2>
+      <img src="<%= spot.image_url %>">
+      <br />
+    <br>
+    Tags:
+      <% spot.tags.forEach(function (tag) { %>
+        <%= tag.tag_name %>
+      <% }); %>
+    <br />
+    <% }) %>
+  </script>
 
 </body>
 

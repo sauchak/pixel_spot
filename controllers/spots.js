@@ -8,17 +8,9 @@ var _ = require("underscore");
 var index = function (req, res, next) {
 
   User.find({}, function(error, users){
-    var tagSearch = 'cat'; //route our search parameters to here
     var spots = [];
     users.forEach(function(user) {
       spots = spots.concat(user.spots);
-    });
-    spots = spots.filter(function(spot) {
-      var found = false;
-      spot.tags.forEach(function(tag) {
-        if (tag.tag_name === tagSearch) found = true;
-      });
-      return found;
     });
     res.render('spots/index', {spots: spots});
   });
@@ -54,21 +46,22 @@ var findSpot = function(req, res, next) {
 
 //Create a new spot
 var create = function(req, res, next) {
-console.log("get here")
-
   var title = req.body.title,
       description = req.body.description,
       flickrUrl = req.body["flickr-url"],
       address = req.body.address,
       rating = 0,
-      tags = req.body["additional-tags"];
+      tags = req.body["additional-tags"],
+      defaultTags = req.body.tags;
 
-//[{tag_name:"cat"},{tag_name:"bench"}]
+  defaultTags = _.map(defaultTags,function(tag){
+    return {tag_name: tag.toLowerCase()}
+  })
+
   tags = tags.split(',');
-  tags = _.map(tags,function(tag) { return {tag_name: tag.trim()}; });
-  console.log(tags)
+  tags = _.map(tags,function(tag) { return {tag_name: tag.trim().toLowerCase()}; });
+  tags = tags.concat(defaultTags);
 
-//  var self = res;
   // TODO (Wayne) CHANGE THIS BEFORE GOING INTO PRODUCTION -- TESTING ONLY!!!
 //  userId = req.body.userid;
   userId = res.locals.user._id;
@@ -76,6 +69,7 @@ console.log("get here")
 
   User.findById(userId, function(err, user){
     // FIXME | CHANGE VARIABLE NAMES if i have time later go back and refactor the regex to be something better cause this one is terrible
+    // TODO | add error checking for url to make sure it is valid or the code blows up
     var re = /https:\/\/www\.flickr\.com\/photos\/(.*)/i
     var regexResult = re.exec(flickrUrl)[1].split('/')
 
@@ -146,26 +140,60 @@ var destroy = function(req, res) {
 
 // grabs the data from the search input and redirects to the view page
 var search = function (req, res, next) {
+  var tagList;
   if (req.query.tags)
   {
     tagList = req.query.tags.split(',');
-    tagList = _.map(tagList,function(tag) { return tag.trim(); });
-    User.find({"spots.tags.tag_name":{"$in":tagList}}, function(error, users){
-      var spots = [];
-      users.forEach(function(user) {
-        spots = spots.concat(user.spots);
-      });
-      spots = spots.filter(function(spot) {
-        var found = false;
-        spot.tags.forEach(function(tag) {
-          if (tagList.indexOf(tag.tag_name) >= 0) found = true;
-        });
-        return found;
-      });
-      res.render('spots/index', {spots:spots})
-    });
+    tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
   }
+  tags = {"spots.tags.tag_name":{"$in":[tagList]}};
+  User.find(tags, function(error, users){
+    if (error) { console.log(error); }
+    var spots = [];
+    users.forEach(function(user) {
+      spots = spots.concat(user.spots);
+    });
+    spots = spots.filter(function(spot) {
+      var found = false;
+      spot.tags.forEach(function(tag) {
+        if (tagList.indexOf(tag.tag_name) >= 0) found = true;
+      });
+      return found;
+    });
+    res.render('spots/search', {spots:spots})
+  });
 };
+
+var ajax = function (req, res, next) {
+  var tagList = [];
+  if (req.query.tags)
+  {
+    tagList = req.query.tags.split(',');
+    tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
+  }
+  tags = {"spots.tags.tag_name":{"$in":[tagList]}};
+  User.find(tags, function(error, users){
+    if (error) { console.log(error); }
+    var spots = [];
+    users.forEach(function(user) {
+      spots = spots.concat(user.spots);
+    });
+    spots = spots.filter(function(spot) {
+      var found = false;
+      spot.tags.forEach(function(tag) {
+        if (tagList.indexOf(tag.tag_name) >= 0)
+          {
+            found = true;
+          }
+      });
+      return found;
+    });
+    console.log(spots)
+    res.json(JSON.stringify(spots));
+  });
+};
+
+
 
 module.exports = {
   index: index,
@@ -177,6 +205,7 @@ module.exports = {
   update: update,
   destroy: destroy,
   find: findSpot,
+  ajax: ajax,
   search: search
 };
 
