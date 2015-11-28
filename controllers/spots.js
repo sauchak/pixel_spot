@@ -146,7 +146,8 @@ var search = function (req, res, next) {
     tagList = req.query.tags.split(',');
     tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
   }
-  tags = {"spots.tags.tag_name":{"$in":[tagList]}};
+
+  tags = {"spots.tags.tag_name":{"$in":tagList}};
   User.find(tags, function(error, users){
     if (error) { console.log(error); }
     var spots = [];
@@ -166,12 +167,17 @@ var search = function (req, res, next) {
 
 var ajax = function (req, res, next) {
   var tagList = [];
-  if (req.query.tags)
+  if (req.query.defaultTags)
   {
-    tagList = req.query.tags.split(',');
+    tagList = req.query.defaultTags.split(',');
     tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
   }
-  tags = {"spots.tags.tag_name":{"$in":[tagList]}};
+  var addTags = req.query.additionalTags.split(',');
+
+  addTags = _.map(addTags,function(tag) { return tag.trim().toLowerCase(); });
+  tagList = tagList.concat(addTags);
+
+  var tags = {"spots.tags.tag_name":{"$in":tagList}};
   User.find(tags, function(error, users){
     if (error) { console.log(error); }
     var spots = [];
@@ -188,7 +194,6 @@ var ajax = function (req, res, next) {
       });
       return found;
     });
-    console.log(spots)
     res.json(JSON.stringify(spots));
   });
 };

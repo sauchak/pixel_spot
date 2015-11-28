@@ -18,7 +18,6 @@ $(document).ready(function() {
   }).done(
     function(data){
       data = JSON.parse(data);
-      console.log(data);
 
       data.forEach(function(d)
       {
@@ -37,7 +36,6 @@ $(document).ready(function() {
   }).done(
     function(data){
       data = JSON.parse(data);
-      console.log(data);
 
       data.forEach(function(d)
       {
@@ -63,13 +61,13 @@ $(document).ready(function() {
       url:"http://localhost:3000/spots/search/ajax",
       method:'GET',
       dataType: 'json',
-      data: {"tags":defaultTags},
+      data: {"defaultTags":defaultTags, "additionalTags":$("#additional-tags").val()},
       context: document.body
     }).done(
       function(data){
-        console.log("data is " + data);
         spots = JSON.parse(data);
 
+        $destination.html("");
         renderedHtmlView = renderLi({tags: spots});
         $destination.append(renderedHtmlView);
       }
