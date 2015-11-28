@@ -52,10 +52,10 @@ module.exports = function(app, passport) {
   */
   router.get('/spots/:id/vote', spotsController.vote);
   router.get('/spots/search/all', spotsController.search);
+  router.get('/spots/search/advanced', spotsController.advancedSearch);
+//  router.get('/spots/search/find', spotsController.find);
   router.put('/spots/:id', isLoggedIn, spotsController.update); // to edit a spot
   router.delete('/spots/:id', isLoggedIn, spotsController.destroy); // to delete a spot
-  router.get('/spots/search/find', spotsController.find);
-  router.get('/spots/search/ajax', spotsController.ajax);
 
 
   app.use('/',router)
