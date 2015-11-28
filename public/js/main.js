@@ -11,7 +11,7 @@ $(document).ready(function() {
   renderLi = _.template($templateEl.html());
 
   $.ajax({
-    url:"http://localhost:3000/spots",
+    url:"/spots",
     method:'GET',
     dataType: 'json',
     context: document.body
@@ -29,7 +29,7 @@ $(document).ready(function() {
   );
 
   $.ajax({
-    url:"http://localhost:3000/spots/search/all",
+    url:"/spots/search/all",
     method:'GET',
     dataType: 'json',
     context: document.body
@@ -58,7 +58,7 @@ $(document).ready(function() {
     }).get().join();
 
     $.ajax({
-      url:"http://localhost:3000/spots/search/ajax",
+      url:"/spots/search/ajax",
       method:'GET',
       dataType: 'json',
       data: {"defaultTags":defaultTags, "additionalTags":$("#additional-tags").val()},
@@ -73,6 +73,40 @@ $(document).ready(function() {
       }
     );
   });
+
+
+  $('#input-search').keypress(function (e) {
+    if (e.which == 13) {
+      document.location.href="/spots/search/all?tags=" + $("#input-search").val();
+      return false;
+    }
+  });
+
+  $('#upvote').on("click",function(){
+    vote($(this).attr("data-id"),$(this).attr("data-value"));
+  })
+
+  $('#downvote').on("click",function(){
+    vote($(this).attr("data-id"),$(this).attr("data-value"));
+  })
+
+  function vote(id,value)
+  {
+    $.ajax({
+      url:"/spots/" + id + "/vote",
+      method:'GET',
+      dataType: 'json',
+      data: {"vote": value},
+      context: document.body
+    }).done(
+      function(data){
+        rating = JSON.parse(data);
+
+        $destination = $('#rating');
+        $destination.html(rating);
+      }
+    );
+  }
 /*
   $("#new-spot-form").on("submit", function(evt){
     $.ajax({

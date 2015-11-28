@@ -191,7 +191,7 @@ p.results {
 }
 
 .imageDetails #showDetails {
-  width: 60%;
+  width: 50%;
   float: left;
 }
 
@@ -233,7 +233,7 @@ p.results {
   padding-top: 10px;
 }
 
-#title{
+p #title{
   padding-top: 24px;
   font-weight: bold;
   font-size: 20px;
@@ -283,4 +283,9 @@ p.results {
 
 .box-shadow--4dp {
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2)
+
+.map {
+  display:inline-block;
+  width:50%;
+  height:300px;
 }
