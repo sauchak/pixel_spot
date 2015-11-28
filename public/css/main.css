@@ -226,7 +226,7 @@ p.results {
   padding-top: 10px;
 }
 
-#title{
+#imageTitle{
   padding-top: 24px;
   font-weight: bold;
   font-size: 20px;
@@ -239,7 +239,7 @@ p.results {
   top: 300px;
 }
 
-.container-fluid {
+.post {
   padding-left: 10%;
 }
 
