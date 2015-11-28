@@ -71,6 +71,7 @@
     </div>
   </main>
 
+
   <div class="results" id="spotscontainer">
     <$ spots = JSON.parse(spots) $>
     <p>Search results: <$= spots.length $>&nbsp;<$ if (spots.length == 1) { $> match found<$ } else { $>matches found<$ } $></p>
@@ -89,6 +90,27 @@
   </div>
 
   <$- include('../partials/scripts') $>
+
+
+  <script type="text/javascript">
+    function initMap(loc, lat,lon)
+    {
+      var mapProp = {
+        center:new google.maps.LatLng(lat,lon),
+        zoom:13,
+        zoomControl: true,
+        scaleControl: true,
+        mapTypeId:google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map"),mapProp);
+      var myLatLng = {lat: lat, lng: lon};
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: loc
+      });
+    }
+  </script>
 
   <script type="text/template" id="spot-template">
     <p>Search results: <%= _.size(spots) %>&nbsp;<% if (spots.length == 1) { %> match found<% } else { %>matches found<% } %></p>

@@ -28,17 +28,7 @@ var show = function(req, res, next) {
     res.render('spots/show', {spot: spots[0]});
   });
 };
-/*
-//Upvote a spot
-var upvote = function(req, res, next) {
-  changeVote(req, res, 1);
-};
 
-//Downvote a spot
-var downvote = function(req, res, next) {
-  changeVote(req, res, -1);
-};
-*/
 var vote = function(req, res, next) {
   User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
     var spots = user.spots.filter(function(s){
@@ -52,15 +42,14 @@ var vote = function(req, res, next) {
   });
 };
 
-
 var newSpot = function(req, res, next) {
   res.render('spots/new');
 };
-
+/*
 var findSpot = function(req, res, next) {
   res.render('spots/search',{spots:""});
 };
-
+*/
 //Create a new spot
 var create = function(req, res, next) {
   var title = req.body.title,
@@ -72,17 +61,7 @@ var create = function(req, res, next) {
   var defaultTags = aryToTagObj(req.body.tags);
   var additionalTags = strToTagObj(req.body["additional-tags"]);
   var tags = defaultTags.concat(additionalTags);
-/*
-  defaultTags = _.map(defaultTags,function(tag){
-    return {tag_name: tag.toLowerCase()}
-  })
 
-  tags = tags.split(',');
-  tags = _.map(tags,function(tag) { return {tag_name: tag.trim().toLowerCase()}; });
-  tags = tags.concat(defaultTags);
-*/
-  // TODO (Wayne) CHANGE THIS BEFORE GOING INTO PRODUCTION -- TESTING ONLY!!!
-//  userId = req.body.userid;
   userId = res.locals.user._id;
   address = "";
 
@@ -174,7 +153,7 @@ var search = function (req, res, next) {
   });
 };
 
-var ajax = function (req, res, next) {
+var advancedSearch = function (req, res, next) {
   var tags = "";
   var defaultTags = "";
   if (req.query.defaultTags)
@@ -196,30 +175,16 @@ var ajax = function (req, res, next) {
 module.exports = {
   index: index,
   show: show,
-//  upvote: upvote,
-//  downvote: downvote,
   vote: vote,
   create: create,
   new: newSpot,
   update: update,
   destroy: destroy,
-  find: findSpot,
-  ajax: ajax,
+//  find: findSpot,
+  advancedSearch: advancedSearch,
   search: search
 };
-/*
-function changeVote(req, res, count) {
-  User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
-    var spots = user.spots.filter(function(s){
-      return s._id == req.params.id;
-    });
-    spots[0].rating += count;
-    user.save(function(err) {
-      res.redirect('/spots/' + spots[0]._id);
-    });
-  });
-}
-*/
+
 // convert array to tag object as key:value pair
 function aryToTagObj(ary)
 {
