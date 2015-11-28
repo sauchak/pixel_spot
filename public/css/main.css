@@ -239,9 +239,9 @@ p.results {
   top: 300px;
 }
 
-.container-fluid {
+/*.container-fluid {
   padding-left: 10%;
-}
+}*/
 
 .buttons {
   position: absolute;
@@ -260,6 +260,18 @@ p.results {
 
 
 /* index views */
+
+#indexView {
+  width: 1080px;
+}
+
+#indexHeader{
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 10px;
+  width: 1080px;
+}
 
 .indexTemplate {
   display:inline-block;
