@@ -63,7 +63,7 @@ a.like + span.like {
 /*Welcome page styling*/
 
 
-.container {
+.welcomeContainer {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -245,7 +245,8 @@ p.results {
 
 /* spots/index view */
 .indexTemplate {
-
+  display:inline-block;
+  text-align:center;
 }
 
 .indexSpotContainer {
@@ -258,13 +259,15 @@ p.results {
 }
 
 .maxImageWidth {
+  margin-top: 20px;
   max-height: 275px;
   max-width: 300px;
 }
 
 #containerButton {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
+  left: 144px;
 }
 
 .box-shadow--2dp {
