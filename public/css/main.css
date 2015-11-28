@@ -243,6 +243,13 @@ p.results {
   padding-top: 20px;
 }
 
+/*Users show view to edit and delete spots*/
+
+.btn-primary {
+  background-color: midnightblue;
+}
+
+
 /* spots/index view */
 .indexTemplate {
   display:inline-block;
