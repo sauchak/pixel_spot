@@ -6,13 +6,14 @@
 <body>
   <$- include('../partials/header', {subHeading: 'Welcome'}) $>
   <h2>Search Results</h2>
+
   <div class="container box">
     <$ spots.forEach(function (spot) { $>
     <div class="indexTemplate">
-      <div class="indexSpotContainer">
-        <h2><$= spot.title $></h2>
+      <div class="indexSpotContainer box-shadow--4dp">
+        <h3><$= spot.title $></h3>
           <div>
-          <img class="maxImageWidth" src=<$= spot.image_url $>>
+          <img class="maxImageWidth box-shadow--2dp" src=<$= spot.image_url $>>
           </div>
          <br>
          <span> Tags:
@@ -22,12 +23,14 @@
           <$ }); $>
             <$= tagString.replace(/,\s*$/, ""); $>
           </span>
-        <br />
+        <br>
+          <span>Rating: <$= spot.rating $> </span>
+        <br>
+        <a class="btn btn-default" id="containerButton" href="../<$= spot._id $>" role="button">Detail</a>
       </div>
     </div>
     <$ }); $>
   </div>
-
   <$- include('../partials/scripts') $>
 </body>
 </html>
