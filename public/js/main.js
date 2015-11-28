@@ -73,6 +73,14 @@ $(document).ready(function() {
       }
     );
   });
+
+
+  $('#input-search').keypress(function (e) {
+    if (e.which == 13) {
+      document.location.href="/spots/search/all?tags=" + $("#input-search").val();
+      return false;
+    }
+  });
 /*
   $("#new-spot-form").on("submit", function(evt){
     $.ajax({

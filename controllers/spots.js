@@ -153,7 +153,7 @@ var search = function (req, res, next) {
 
   User.find(tagQuery, function(error, users){
     if (error) { console.log(error); }
-    var spots = getSpots(users,tags)
+    var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
     res.render('spots/search', {spots:spots})
   });
 };
@@ -176,7 +176,7 @@ var ajax = function (req, res, next) {
   var tagQuery = {"spots.tags.tag_name":{"$in":tags}};
   User.find(tags, function(error, users){
     if (error) { console.log(error); }
-    var spots = getSpots(users,tags)
+    var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
 /*
     var spots = [];
     users.forEach(function(user) {

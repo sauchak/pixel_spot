@@ -72,10 +72,10 @@
   </main>
 
   <div class="results" id="spotscontainer">
-    <p>Search results: <$= spots.length $>&nbsp;<$ if (spots.length == 1) { $> match found<$ } else { $>matches found<$ } $></p>
+    <p>Search results: <$=  $>&nbsp;<$ if (spots.length == 1) { $> match found<$ } else { $>matches found<$ } $></p>
     <$ spots.forEach(function (spot) { $>
       <h2><$= spot.title $></h2>
-      <img src="<$= spot.image_url $>">
+      <a href="/spots/<$= spot._id $>"><img src="<$= spot.image_url $>"></a>
       <br />
     <br>
     Tags:
@@ -83,16 +83,17 @@
         <$= tag.tag_name $>
       <$ }); $>
     <br />
+    Rating:<$= spot.rating $><br>
     <$ }); $>
   </div>
 
   <$- include('../partials/scripts') $>
 
   <script type="text/template" id="spot-template">
-    <p>Search results: <%= spots.length %>&nbsp;<% if (spots.length == 1) { %> match found<% } else { %>matches found<% } %></p>
+    <p>Search results: <%= _.size(spots) %>&nbsp;<% if (spots.length == 1) { %> match found<% } else { %>matches found<% } %></p>
     <% _.forEach(spots,function (spot) { %>
       <h2><%= spot.title %></h2>
-      <img src="<%= spot.image_url %>">
+      <a href="/spots/<%= spot._id %>"><img src="<%= spot.image_url %>"></a>
       <br />
     <br>
     Tags:
@@ -100,6 +101,7 @@
         <%= tag.tag_name %>
       <% }); %>
     <br />
+    Rating:<%= spot.rating %><br>
     <% }) %>
   </script>
 

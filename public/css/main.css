@@ -191,7 +191,7 @@ p.results {
 }
 
 .imageDetails #showDetails {
-  width: 60%;
+  width: 50%;
   float: left;
 }
 
@@ -243,3 +243,8 @@ p.results {
   padding-top: 20px;
 }
 
+.map {
+  display:inline-block;
+  width:50%;
+  height:300px;
+}
