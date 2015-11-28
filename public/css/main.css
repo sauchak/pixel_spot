@@ -215,10 +215,6 @@ p.results {
 /*User show View (user profile) */
 
 
-.box {
-  text-align: center;
-}
-
 #userName {
   text-align: center;
   font-size: 30px;
@@ -241,6 +237,7 @@ p.results {
 
 .post {
   padding-left: 10%;
+  text-align: center;
 }
 
 .buttons {
