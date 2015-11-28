@@ -3,20 +3,48 @@
 <head>
   <$- include('../partials/head') $>
 </head>
-
 <body>
   <$- include('../partials/header', {subHeading: 'Welcome'}) $>
-  <h2>Spots/Index</h2>
-  <$ spots.forEach(function (spot) { $>
-    <h2><$= spot.title $></h2>
-    <img src=<$= spot.image_url $>>
-    <br />
-  <br>
-    <$ spot.tags.forEach(function (tag) { $>
-      <$= tag.tag_name $>
-    <$ }); $>
-  <br />
-  <$ }); $>
+
+  <div class="container-fluid box">
+
+    <div id="userName">
+      <p>Search Results</p>
+    </div>
+
+    <div class="row indexTemplate">
+      <$ spots.forEach(function (spot) { $>
+
+        <div class="col-md-4 indexSpotContainer box-shadow--4dp">
+
+          <div>
+            <img class="maxImageWidth box-shadow--2dp" src=<$= spot.image_url $>>
+          </div>
+
+          <p id="title"> <$= spot.title $> </p>
+
+          <span> Tags:
+            <$ var tagString = "" $>
+            <$ spot.tags.forEach(function (tag) { $>
+            <$ tagString += (tag.tag_name + ", ");$>
+            <$ }); $>
+            <$= tagString.replace(/,\s*$/, ""); $>
+          </span>
+          <br>
+
+          <span> Rating: <$= spot.rating $> </span>
+          <br>
+
+          <a class="btn btn-default box-shadow--2dp" id="containerButton" href="../<$= spot._id $>" role="button">Detail</a>
+
+        </div>
+
+      <$ }); $>
+    </div>
+
+  </div>
+
   <$- include('../partials/scripts') $>
 </body>
 </html>
+

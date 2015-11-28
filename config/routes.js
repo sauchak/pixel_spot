@@ -44,7 +44,7 @@ module.exports = function(app, passport) {
   // spots resource paths:
   router.get('/spots', spotsController.index); // to show spots search results
   router.get('/spots/:id', spotsController.show); // to show one spot
-  app.get('/spots/new', spotsController.new); // to show the create page
+  app.get('/spots/new', isLoggedIn, spotsController.new); // to show the create page
   router.post('/spots/new', spotsController.create); // create a new spot
   router.get('/spots/:id/upvote', isLoggedIn, spotsController.upvote); // to show one spot
   router.get('/spots/:id/downvote', isLoggedIn, spotsController.downvote); // to show one spot
@@ -52,6 +52,7 @@ module.exports = function(app, passport) {
   router.put('/spots/:id', isLoggedIn, spotsController.update); // to edit a spot
   router.delete('/spots/:id', isLoggedIn, spotsController.destroy); // to delete a spot
   router.get('/spots/search/find', spotsController.find);
+  router.get('/spots/search/ajax', spotsController.ajax);
 
 
   app.use('/',router)

@@ -63,7 +63,7 @@ a.like + span.like {
 /*Welcome page styling*/
 
 
-.container {
+.welcomeContainer {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -243,3 +243,37 @@ p.results {
   padding-top: 20px;
 }
 
+/* spots/index view */
+.indexTemplate {
+  display:inline-block;
+  text-align:center;
+}
+
+.indexSpotContainer {
+  position: relative;
+  height: 400px;
+  width: 350px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.maxImageWidth {
+  margin-top: 20px;
+  max-height: 275px;
+  max-width: 300px;
+}
+
+#containerButton {
+  position: absolute;
+  bottom: 10px;
+  left: 144px;
+}
+
+.box-shadow--2dp {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12)
+}
+
+.box-shadow--4dp {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2)
+}

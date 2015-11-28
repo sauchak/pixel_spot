@@ -125,3 +125,4 @@ ___
 - When using geo-location the data doesn't always map exactly back to a specific zipcode.  There's not a one-to-one relationship between lattitude/longitude and zipcodes 
 - user input needs to be sanitized
 - implement a more robust search feature that matches partial results
+- need better error handling. e.g. search breaks when no input is specified
