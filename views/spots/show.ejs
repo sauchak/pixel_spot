@@ -7,7 +7,7 @@
   <$- include('../partials/header', {subHeading: 'Welcome', user: false}) $>
   <main>
 
-      <div class="showContainer">
+      <div class="showContainer box-shadow--4dp">
 
         <div id="mainImage">
             <img class="showImage" src="/images/bench-nature.jpg" /> <!-- <$= spot.image_url $> > -->
@@ -15,7 +15,7 @@
 
         <div class="imageDetails">
           <div id="showDetails">
-            <$= spot.title $>
+            <p id="showTitle">Title: <$= spot.title $></p>
             <br>
             <$= spot.description $>
             <br>
@@ -24,6 +24,7 @@
             <a href="/spots/<$= spot._id $>/downvote" class="like"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
             &nbsp;&nbsp;<span class="like"><$= spot.rating $></span>&nbsp;&nbsp;
             <a href="/spots/<$= spot._id $>/upvote" class="like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
+            <br>
             <br>
             <$ spot.tags.forEach(function(tag) {$>
             <$= tag.tag_name $>

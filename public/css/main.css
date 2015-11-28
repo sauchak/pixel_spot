@@ -172,22 +172,32 @@ p.results {
 .showContainer {
   width: 960px;
   text-align: center;
-  margin: 0 auto;
-  margin-top: 50px;
+  font-size: 20px;
   background-color: #FFFFFF;
-
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 0px auto;
+  margin-top: 10px;
 }
 
 .showContainer .showImage {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   width: 75%;
   margin: 0 auto;
 }
 
 .imageDetails {
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
   margin-top: 25px;
   margin-bottom: 25px;
+}
+
+#showTitle {
+  font-size: 25px;
+  font-weight: 700;
 }
 
 .imageDetails #showDetails {
