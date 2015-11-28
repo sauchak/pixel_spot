@@ -212,46 +212,45 @@ p.results {
 
 
 /* ******************* */
-/*User Profile */
+/*User show View (user profile) */
 
-.userImage {
-  float: left;
-  margin: 20px;
-  max-width: 60%;
-}
 
 .box {
   text-align: center;
 }
 
-.boxContent {
-  margin-right: 10px;
-/*  font-family: 'Josefin Sans', sans-serif;*/
-  font-weight: bold;
-}
-
-#profileImage {
-  max-height: 70%;
-  max-width: 80%;
-}
-
 #userName {
   text-align: center;
-/*  font-family: 'Josefin Sans', sans-serif;*/
   font-size: 30px;
   font-weight: bold;
   padding-top: 10px;
 }
 
-p #title{
+#title{
   padding-top: 24px;
   font-weight: bold;
   font-size: 20px;
 }
 
 #description {
-  padding-top: 20px;
+  font-size: 16px;
+  position:  absolute;
+  left: 100px;
+  top: 300px;
 }
+
+.container-fluid {
+  padding-left: 10%;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 5px;
+  right: 100px;
+  left: 100px;
+}
+
+
 
 /*Users show view to edit and delete spots*/
 
@@ -260,7 +259,8 @@ p #title{
 }
 
 
-/* spots/index view */
+/* index views */
+
 .indexTemplate {
   display:inline-block;
   text-align:center;
@@ -268,17 +268,35 @@ p #title{
 
 .indexSpotContainer {
   position: relative;
-  height: 400px;
+  height: 375px;
   width: 350px;
   border: 1px solid black;
   border-radius: 5px;
   margin: 5px;
 }
 
+.welcomeIndexSpotContainer {
+  position: relative;
+  height: 350px;
+  width: 350px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+  bottom: 10px;
+
+}
+
 .maxImageWidth {
   margin-top: 20px;
   max-height: 275px;
   max-width: 300px;
+}
+
+#indexText {
+  position: absolute;
+  width: 325px;
+  bottom: 10px;
 }
 
 #containerButton {
@@ -300,3 +318,6 @@ p #title{
   width:50%;
   height:300px;
 }
+
+
+

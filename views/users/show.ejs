@@ -7,17 +7,17 @@
   <$- include('../partials/header', { subHeading: user.name + "'s Profile" }) $>
 
 <main>
-  <div  id="userName">
+  <div  class="container-fluid box" id="userName">
    <p> <$= otherUser.name $>'s Spots!</p>
   </div>
-    <div class="container box">
+    <div class="container-fluid box">
       <$ otherUser.spots.forEach(function(spot) { $>
-      <div class="col-md-4 panel panel-default space center-block boxContent">
+      <div class="col-md-4 indexSpotContainer box-shadow--4dp">
         <p id="title"><$= spot.title$></p>
-        <img id="profileImage" src="<$= spot.image_url $>">
+        <img class="maxImageWidth box-shadow--2dp"src="<$= spot.image_url $>" >
         <p id="description">"<$= spot.description$>"</p>
-        <input type="button" class="btn btn-primary" value="Edit" id="btn-advanced-edit">
-        <input type="button" class="btn btn-primary" value="Delete" id="btn-advanced-delete">
+        <p class="buttons"><input type="button" class="btn btn-primary" value="Edit" id="btn-advanced-edit">
+        <input type="button" class="btn btn-primary" value="Delete" id="btn-advanced-delete"></p>
 
       </div>
       <$ }); $>
