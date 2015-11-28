@@ -11,7 +11,7 @@ $(document).ready(function() {
   renderLi = _.template($templateEl.html());
 
   $.ajax({
-    url:"http://localhost:3000/spots",
+    url:"/spots",
     method:'GET',
     dataType: 'json',
     context: document.body
@@ -29,7 +29,7 @@ $(document).ready(function() {
   );
 
   $.ajax({
-    url:"http://localhost:3000/spots/search/all",
+    url:"/spots/search/all",
     method:'GET',
     dataType: 'json',
     context: document.body
@@ -58,7 +58,7 @@ $(document).ready(function() {
     }).get().join();
 
     $.ajax({
-      url:"http://localhost:3000/spots/search/ajax",
+      url:"/spots/search/ajax",
       method:'GET',
       dataType: 'json',
       data: {"defaultTags":defaultTags, "additionalTags":$("#additional-tags").val()},

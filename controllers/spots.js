@@ -154,7 +154,8 @@ var search = function (req, res, next) {
   User.find(tagQuery, function(error, users){
     if (error) { console.log(error); }
     var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
-    res.render('spots/search', {spots:spots})
+    console.log(spots.length);
+    res.render('spots/search', {spots:spots,numrecs:_.size(spots)})
   });
 };
 
