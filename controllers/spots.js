@@ -50,10 +50,12 @@ var create = function(req, res, next) {
       description = req.body.description,
       flickrUrl = req.body["flickr-url"],
       address = req.body.address,
-      rating = 0,
-      tags = req.body["additional-tags"],
-      defaultTags = req.body.tags;
+      rating = 0;
 
+  var defaultTags = aryToTagObj(req.body.tags);
+  var additionalTags = strToTagObj(req.body["additional-tags"]);
+  var tags = defaultTags.concat(additionalTags);
+/*
   defaultTags = _.map(defaultTags,function(tag){
     return {tag_name: tag.toLowerCase()}
   })
@@ -61,7 +63,7 @@ var create = function(req, res, next) {
   tags = tags.split(',');
   tags = _.map(tags,function(tag) { return {tag_name: tag.trim().toLowerCase()}; });
   tags = tags.concat(defaultTags);
-
+*/
   // TODO (Wayne) CHANGE THIS BEFORE GOING INTO PRODUCTION -- TESTING ONLY!!!
 //  userId = req.body.userid;
   userId = res.locals.user._id;
@@ -138,48 +140,44 @@ var destroy = function(req, res) {
   });
 };
 
-// grabs the data from the search input and redirects to the view page
+// grabs the data from the search input (in the menu bar) and redirects to the view page
 var search = function (req, res, next) {
-  var tagList;
+  var tags = "";
   if (req.query.tags)
   {
-    tagList = req.query.tags.split(',');
-    tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
+      tags = strToTags(req.query.tags);
+//    tagList = req.query.tags.split(',');
+//    tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
   }
+  var tagQuery = {"spots.tags.tag_name":{"$in":tags}};
 
-  tags = {"spots.tags.tag_name":{"$in":tagList}};
-  User.find(tags, function(error, users){
+  User.find(tagQuery, function(error, users){
     if (error) { console.log(error); }
-    var spots = [];
-    users.forEach(function(user) {
-      spots = spots.concat(user.spots);
-    });
-    spots = spots.filter(function(spot) {
-      var found = false;
-      spot.tags.forEach(function(tag) {
-        if (tagList.indexOf(tag.tag_name) >= 0) found = true;
-      });
-      return found;
-    });
+    var spots = getSpots(users,tags)
     res.render('spots/search', {spots:spots})
   });
 };
 
 var ajax = function (req, res, next) {
-  var tagList = [];
+  var tags = "";
+  var defaultTags = "";
   if (req.query.defaultTags)
   {
-    tagList = req.query.defaultTags.split(',');
-    tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
+    defaultTags = strToTags(req.query.defaultTags);
+//    tagList = req.query.defaultTags.split(',');
+//    tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
   }
-  var addTags = req.query.additionalTags.split(',');
 
-  addTags = _.map(addTags,function(tag) { return tag.trim().toLowerCase(); });
-  tagList = tagList.concat(addTags);
+  var addTags = strToTags(req.query.additionalTags);
+//  var addTags = req.query.additionalTags.split(',');
+//  addTags = _.map(addTags,function(tag) { return tag.trim().toLowerCase(); });
+  tags = defaultTags.concat(addTags);
 
-  var tags = {"spots.tags.tag_name":{"$in":tagList}};
+  var tagQuery = {"spots.tags.tag_name":{"$in":tags}};
   User.find(tags, function(error, users){
     if (error) { console.log(error); }
+    var spots = getSpots(users,tags)
+/*
     var spots = [];
     users.forEach(function(user) {
       spots = spots.concat(user.spots);
@@ -194,6 +192,7 @@ var ajax = function (req, res, next) {
       });
       return found;
     });
+*/
     res.json(JSON.stringify(spots));
   });
 };
@@ -224,4 +223,40 @@ function changeVote(req, res, count) {
       res.redirect('/spots/' + spots[0]._id);
     });
   });
+}
+
+// convert array to tag object as key:value pair
+function aryToTagObj(ary)
+{
+  return _.map(ary,function(tag){return {tag_name: tag.toLowerCase()}})
+}
+
+// convert comma delimited string to tag object as key:value pair
+function strToTagObj(str)
+{
+  str = str.split(',');
+  return _.map(str,function(tag) { return {tag_name: tag.trim().toLowerCase()}; });
+}
+
+// convert comma delimited sting to array of tags
+function strToTags(str)
+{
+  str = str.split(',');
+  return _.map(str,function(tag) { return tag.trim().toLowerCase(); });
+}
+
+function getSpots(users,tags)
+{
+  var spots = [];
+  users.forEach(function(user) {
+    spots = spots.concat(user.spots);
+  });
+  spots = spots.filter(function(spot) {
+    var found = false;
+    spot.tags.forEach(function(tag) {
+      if (tags.indexOf(tag.tag_name) >= 0) found = true;
+    });
+    return found;
+  });
+  return spots
 }
