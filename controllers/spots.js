@@ -11,6 +11,9 @@ var index = function (req, res, next) {
     var spots = [];
     users.forEach(function(user) {
       spots = spots.concat(user.spots);
+      spots.sort(function(bot, top){
+        return parseFloat(top.rating) - parseFloat(bot.rating);
+      });
     });
     res.render('spots/index', {spots: spots});
   });
