@@ -22,9 +22,13 @@
             <br>
             <$= spot.address $>
             <br>
-            <a href="/spots/<$= spot._id $>/downvote" class="like"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
-            &nbsp;&nbsp;<span class="like"><$= spot.rating $></span>&nbsp;&nbsp;
-            <a href="/spots/<$= spot._id $>/upvote" class="like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
+            <!--<a href="/spots/<$= spot._id $>/downvote" class="like">-->
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" data-value="-1" data-id="<$= spot._id $>" id="downvote"></span>
+            <!--</a>-->
+            &nbsp;&nbsp;<span class="like" id="rating"><$= spot.rating $></span>&nbsp;&nbsp;
+            <!--<a href="/spots/<$= spot._id $>/upvote" class="like">-->
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" data-value="1" data-id="<$= spot._id $>" id="upvote"></span>
+            <!--</a>-->
             <br>
             <$ spot.tags.forEach(function(tag) {$>
             <$= tag.tag_name $>

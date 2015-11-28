@@ -72,7 +72,8 @@
   </main>
 
   <div class="results" id="spotscontainer">
-    <p>Search results: <$= numrecs $>&nbsp;<$ if (spots.length == 1) { $> match found<$ } else { $>matches found<$ } $></p>
+    <$ spots = JSON.parse(spots) $>
+    <p>Search results: <$= spots.length $>&nbsp;<$ if (spots.length == 1) { $> match found<$ } else { $>matches found<$ } $></p>
     <$ spots.forEach(function (spot) { $>
       <h2><$= spot.title $></h2>
       <a href="/spots/<$= spot._id $>"><img src="<$= spot.image_url $>"></a>

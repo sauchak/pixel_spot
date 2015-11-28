@@ -25,7 +25,7 @@ var show = function(req, res, next) {
     res.render('spots/show', {spot: spots[0]});
   });
 };
-
+/*
 //Upvote a spot
 var upvote = function(req, res, next) {
   changeVote(req, res, 1);
@@ -35,6 +35,20 @@ var upvote = function(req, res, next) {
 var downvote = function(req, res, next) {
   changeVote(req, res, -1);
 };
+*/
+var vote = function(req, res, next) {
+  User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
+    var spots = user.spots.filter(function(s){
+      return s._id == req.params.id;
+    });
+    spots[0].rating += parseInt(req.query.vote);
+    user.save(function(err) {
+//      res.redirect('/spots/' + spots[0]._id);
+      res.json(JSON.stringify(spots[0].rating));
+    });
+  });
+};
+
 
 var newSpot = function(req, res, next) {
   res.render('spots/new');
@@ -146,8 +160,6 @@ var search = function (req, res, next) {
   if (req.query.tags)
   {
       tags = strToTags(req.query.tags);
-//    tagList = req.query.tags.split(',');
-//    tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
   }
   var tagQuery = {"spots.tags.tag_name":{"$in":tags}};
 
@@ -155,7 +167,7 @@ var search = function (req, res, next) {
     if (error) { console.log(error); }
     var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
     console.log(spots.length);
-    res.render('spots/search', {spots:spots,numrecs:_.size(spots)})
+    res.render('spots/search', {spots:JSON.stringify(spots),numrecs:_.size(spots)})
   });
 };
 
@@ -165,46 +177,25 @@ var ajax = function (req, res, next) {
   if (req.query.defaultTags)
   {
     defaultTags = strToTags(req.query.defaultTags);
-//    tagList = req.query.defaultTags.split(',');
-//    tagList = _.map(tagList,function(tag) { return tag.trim().toLowerCase(); });
   }
 
   var addTags = strToTags(req.query.additionalTags);
-//  var addTags = req.query.additionalTags.split(',');
-//  addTags = _.map(addTags,function(tag) { return tag.trim().toLowerCase(); });
   tags = defaultTags.concat(addTags);
 
   var tagQuery = {"spots.tags.tag_name":{"$in":tags}};
   User.find(tags, function(error, users){
     if (error) { console.log(error); }
     var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
-/*
-    var spots = [];
-    users.forEach(function(user) {
-      spots = spots.concat(user.spots);
-    });
-    spots = spots.filter(function(spot) {
-      var found = false;
-      spot.tags.forEach(function(tag) {
-        if (tagList.indexOf(tag.tag_name) >= 0)
-          {
-            found = true;
-          }
-      });
-      return found;
-    });
-*/
     res.json(JSON.stringify(spots));
   });
 };
 
-
-
 module.exports = {
   index: index,
   show: show,
-  upvote: upvote,
-  downvote: downvote,
+//  upvote: upvote,
+//  downvote: downvote,
+  vote: vote,
   create: create,
   new: newSpot,
   update: update,
@@ -213,7 +204,7 @@ module.exports = {
   ajax: ajax,
   search: search
 };
-
+/*
 function changeVote(req, res, count) {
   User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
     var spots = user.spots.filter(function(s){
@@ -225,7 +216,7 @@ function changeVote(req, res, count) {
     });
   });
 }
-
+*/
 // convert array to tag object as key:value pair
 function aryToTagObj(ary)
 {

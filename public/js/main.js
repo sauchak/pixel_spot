@@ -81,6 +81,32 @@ $(document).ready(function() {
       return false;
     }
   });
+
+  $('#upvote').on("click",function(){
+    vote($(this).attr("data-id"),$(this).attr("data-value"));
+  })
+
+  $('#downvote').on("click",function(){
+    vote($(this).attr("data-id"),$(this).attr("data-value"));
+  })
+
+  function vote(id,value)
+  {
+    $.ajax({
+      url:"/spots/" + id + "/vote",
+      method:'GET',
+      dataType: 'json',
+      data: {"vote": value},
+      context: document.body
+    }).done(
+      function(data){
+        rating = JSON.parse(data);
+
+        $destination = $('#rating');
+        $destination.html(rating);
+      }
+    );
+  }
 /*
   $("#new-spot-form").on("submit", function(evt){
     $.ajax({
