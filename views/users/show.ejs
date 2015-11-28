@@ -13,7 +13,7 @@
     <div class="container-fluid box">
       <$ otherUser.spots.forEach(function(spot) { $>
       <div class="col-md-4 indexSpotContainer box-shadow--4dp">
-        <p id="title"><$= spot.title$></p>
+        <p id="imageTitle"><$= spot.title$></p>
         <img class="maxImageWidth box-shadow--2dp"src="<$= spot.image_url $>" >
         <p id="description">"<$= spot.description$>"</p>
         <p class="buttons"><input type="button" class="btn btn-primary" value="Edit" id="btn-advanced-edit">
