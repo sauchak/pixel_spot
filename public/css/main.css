@@ -32,7 +32,7 @@ a.like + span.like {
 
 #navLinks {
   color: white;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 #logoPin {
@@ -56,7 +56,7 @@ a.like + span.like {
   text-align: right;
   padding-top: 15px;
   padding-left: 196px;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 
@@ -145,7 +145,7 @@ h3 {
 
 .search input[type="submit"] {
   float: right;
-  position: relative;
+  margin-left: 300px;
   top: -45px;
   background-color: midnightblue;
 }
@@ -242,6 +242,13 @@ p.results {
 #description {
   padding-top: 20px;
 }
+
+/*Users show view to edit and delete spots*/
+
+.btn-primary {
+  background-color: midnightblue;
+}
+
 
 /* spots/index view */
 .indexTemplate {
