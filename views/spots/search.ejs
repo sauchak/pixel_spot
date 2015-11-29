@@ -71,49 +71,48 @@
     </div>
   </main>
 
-
-  <div class="results" id="spotscontainer">
-    <$ spots = JSON.parse(spots) $>
-    <p>Search results: <$= spots.length $>&nbsp;<$ if (spots.length == 1) { $> match found<$ } else { $>matches found<$ } $></p>
-    <$ spots.forEach(function (spot) { $>
-      <h2><$= spot.title $></h2>
-      <a href="/spots/<$= spot._id $>"><img src="<$= spot.image_url $>"></a>
-      <br />
-    <br>
-    Tags:
-      <$ spot.tags.forEach(function (tag) { $>
-        <$= tag.tag_name $>
+  <div class="container-fluid box results" id="spotscontainer">
+    <$ s = JSON.parse(spots) $>
+    <p class="searchresults">Search results: <$= s.length $>&nbsp;<$ if (s.length == 1) { $> match found<$ } else { $>matches found<$ } $></p>
+    <div class="container-fluid box" id="indexView">
+      <div class="row indexTemplate">
+      <$ s.forEach(function (spot) { $>
+        <div class="col-md-4 welcomeIndexSpotContainer box-shadow--4dp">
+          <div>
+            <a href="/spots/<$= spot._id $>"><img class="maxImageWidth box-shadow--2dp" src=<$= spot.image_url $>></a>
+          </div>
+          <div id="indexText">
+            <p id="title"> <$= spot.title $></p>
+            <span> Rating: <$= spot.rating $></span>
+          </div>
+        </div>
       <$ }); $>
-    <br />
-    Rating:<$= spot.rating $><br>
-    <$ }); $>
+      </div>
+    </div>
   </div>
 
   <$- include('../partials/scripts') $>
 
-
-  <script type="text/javascript">
-    function initMap(loc, lat,lon)
-    {
-      var mapProp = {
-        center:new google.maps.LatLng(lat,lon),
-        zoom:13,
-        zoomControl: true,
-        scaleControl: true,
-        mapTypeId:google.maps.MapTypeId.ROADMAP
-      };
-      var map = new google.maps.Map(document.getElementById("map"),mapProp);
-      var myLatLng = {lat: lat, lng: lon};
-      var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title: loc
-      });
-    }
+  <script type="text/template" id="spot-template">
+    <p class="searchresults">Search results: <%= _.size(spots) %>&nbsp;<% if (spots.length == 1) { %> match found<% } else { %>matches found<% } %></p>
+    <div class="container-fluid box" id="indexView">
+      <div class="row indexTemplate">
+      <% _.forEach(spots,function (spot) { %>
+        <div class="col-md-4 welcomeIndexSpotContainer box-shadow--4dp">
+          <div>
+            <a href="/spots/<%= spot._id %>"><img class="maxImageWidth box-shadow--2dp" src=<%= spot.image_url %>></a>
+          </div>
+          <div id="indexText">
+            <p id="title"> <%= spot.title %></p>
+            <span> Rating: <%= spot.rating %></span>
+          </div>
+        </div>
+      <% }); %>
+      </div>
+    </div>
   </script>
 
-  <script type="text/template" id="spot-template">
-    <p>Search results: <%= _.size(spots) %>&nbsp;<% if (spots.length == 1) { %> match found<% } else { %>matches found<% } %></p>
+<!--
     <% _.forEach(spots,function (spot) { %>
       <h2><%= spot.title %></h2>
       <a href="/spots/<%= spot._id %>"><img src="<%= spot.image_url %>"></a>
@@ -126,8 +125,7 @@
     <br />
     Rating:<%= spot.rating %><br>
     <% }) %>
-  </script>
-
+-->
 </body>
 
 </html>
