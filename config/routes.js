@@ -2,7 +2,6 @@ var express = require('express'),
     router  = new express.Router();
 
 // Require controllers.
-var welcomeController = require('../controllers/welcome');
 var usersController   = require('../controllers/users');
 var spotsController   = require('../controllers/spots');
 
@@ -36,25 +35,19 @@ module.exports = function(app, passport) {
   });
 
   // root path:
-  router.get('/', welcomeController.index);
+  router.get('/', spotsController.index);
 
   // users resource paths:
-//  router.get('/users', usersController.index); // to show a list of users
-  router.get('/users/:id', usersController.show); // to show one user
+  router.get('/users/:id', isLoggedIn, usersController.show); // to show one user
 
   // spots resource paths:
   router.get('/spots', spotsController.index); // to show spots search results
   router.get('/spots/:id', spotsController.show); // to show one spot
   app.get('/spots/new', isLoggedIn, spotsController.new); // to show the create page
-  router.post('/spots/new', spotsController.create); // create a new spot
-  /*
-  router.get('/spots/:id/upvote', isLoggedIn, spotsController.upvote); // to show one spot
-  router.get('/spots/:id/downvote', isLoggedIn, spotsController.downvote); // to show one spot
-  */
-  router.get('/spots/:id/vote', spotsController.vote);
+  router.post('/spots/new', isLoggedIn, spotsController.create); // create a new spot
+  router.get('/spots/:id/vote', isLoggedIn, spotsController.vote);
   router.get('/spots/search/all', spotsController.search);
   router.get('/spots/search/advanced', spotsController.advancedSearch);
-//  router.get('/spots/search/find', spotsController.find);
   router.put('/spots/:id', isLoggedIn, spotsController.update); // to edit a spot
   router.delete('/spots/:id', isLoggedIn, spotsController.destroy); // to delete a spot
 

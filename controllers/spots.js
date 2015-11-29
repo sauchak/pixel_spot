@@ -15,7 +15,7 @@ var index = function (req, res, next) {
         return parseFloat(top.rating) - parseFloat(bot.rating);
       });
     });
-    res.render('spots/index', {spots: spots});
+    res.render('welcome/index', {spots: spots});
   });
 };
 
@@ -36,7 +36,6 @@ var vote = function(req, res, next) {
     });
     spots[0].rating += parseInt(req.query.vote);
     user.save(function(err) {
-//      res.redirect('/spots/' + spots[0]._id);
       res.json(JSON.stringify(spots[0].rating));
     });
   });
@@ -45,11 +44,7 @@ var vote = function(req, res, next) {
 var newSpot = function(req, res, next) {
   res.render('spots/new');
 };
-/*
-var findSpot = function(req, res, next) {
-  res.render('spots/search',{spots:""});
-};
-*/
+
 //Create a new spot
 var create = function(req, res, next) {
   var title = req.body.title,
@@ -150,8 +145,7 @@ var search = function (req, res, next) {
   User.find(tagQuery, function(error, users){
     if (error) { console.log(error); }
     var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
-    console.log(spots.length);
-    res.render('spots/search', {spots:JSON.stringify(spots),numrecs:_.size(spots)})
+    res.render('spots/search', {spots:JSON.stringify(spots)})
   });
 };
 
@@ -182,7 +176,6 @@ module.exports = {
   new: newSpot,
   update: update,
   destroy: destroy,
-//  find: findSpot,
   advancedSearch: advancedSearch,
   search: search
 };

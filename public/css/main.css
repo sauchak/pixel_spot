@@ -155,7 +155,7 @@ h3 {
   border: 1px solid black;
   padding: 10px 20px 10px 20px;
   min-width: 400px;
-  max-width: 770px;
+/*  max-width: 770px; */
   margin: 0 auto;
   margin-top: 20px;
   background-color: #FFFFFF;
@@ -165,6 +165,12 @@ p.results {
   text-align: center;
   font-weight: bold;
   margin-top: 10px;
+}
+
+.searchresults {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 /*Show page styling with map and advanced image details*/
