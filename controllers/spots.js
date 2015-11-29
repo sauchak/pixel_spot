@@ -58,8 +58,24 @@ var edit = function(req, res, next) {
       return s._id == req.params.id;
     });
     var defaultTags = ['nature','urban','family','beach','park','engagement','garden','museum','wedding'];
-    var additionalTags = _.chain(spots[0].tags).pluck('tag_name').difference(defaultTags).value().join();
-    res.render('spots/edit',{spot:spots[0], additionalTags:additionalTags});
+//    var nature = false, urban = false, family = false, beach = false,
+//        park = false, engagement = false, garden = false, museum = false, wedding = false;
+    var nature,urban,family,beach,park,engagement,garden,museum,wedding;
+    tags = _.pluck(spots[0].tags,'tag_name');
+    nature = (_.indexOf(tags,'nature') >= 0) ? "CHECKED" : "";
+    urban = (_.indexOf(tags,'urban') >= 0) ? "CHECKED" : "";
+    family = (_.indexOf(tags,'family') >= 0) ? "CHECKED" : "";
+    beach = (_.indexOf(tags,'beach') >= 0) ? "CHECKED" : "";
+    park = (_.indexOf(tags,'park') >= 0) ? "CHECKED" : ""
+    engagement = (_.indexOf(tags,'engagement') >= 0) ? "CHECKED" : "";
+    garden = (_.indexOf(tags,'garden') >= 0) ? "CHECKED" : "";
+    museum = (_.indexOf(tags,'museum') >= 0) ? "CHECKED" : "";
+    wedding = (_.indexOf(tags,'wedding') >= 0) ? "CHECKED" : "";
+//    var additionalTags = _.chain(spots[0].tags).pluck('tag_name').difference(defaultTags).value().join();
+    var additionalTags = _.difference(tags,defaultTags).join();
+    console.log(additionalTags)
+    res.render('spots/edit',{spot:spots[0], additionalTags:additionalTags, nature:nature, urban:urban, family:family,
+                    beach:beach, park:park, engagement:engagement, garden:garden, museum:museum, wedding:wedding });
   });
 };
 
@@ -200,23 +216,6 @@ zipcode = ""
       });
     })
   });
-
-
-/*
-  User.findById(res.locals.user._id, function(err, user){
-    var spotId = req.params.id
-    var spot = user.spots.id(spotId)
-        spot.title = req.body.title,
-        spot.description = req.body.description,
-        spot.image_url = req.body.image_url,
-        spot.address = req.body.address,
-        spot.rating = 0,
-        spot.tags = req.body.tags;
-    user.save(function(err, user) {
-      res.json(JSON.stringify(res.locals.user._id));
-    });
-  });
-*/
 };
 
 //Delete a new spot
