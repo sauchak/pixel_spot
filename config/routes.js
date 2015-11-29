@@ -5,7 +5,6 @@ var express = require('express'),
 var usersController   = require('../controllers/users');
 var spotsController   = require('../controllers/spots');
 
-
 module.exports = function(app, passport) {
   app.use(function(req, res, next){
 //    console.log("set user to " + req.user);
@@ -48,9 +47,9 @@ module.exports = function(app, passport) {
   router.get('/spots/:id/vote', isLoggedIn, spotsController.vote);
   router.get('/spots/search/all', spotsController.search);
   router.get('/spots/search/advanced', spotsController.advancedSearch);
-  router.put('/spots/:id', isLoggedIn, spotsController.update); // to edit a spot
+  router.put('/spots/:id', isLoggedIn, spotsController.update); // save edits to a spot
   router.delete('/spots/:id', isLoggedIn, spotsController.destroy); // to delete a spot
-
+  router.get('/spots/:id/edit', isLoggedIn, spotsController.edit); // show form for edit
 
   app.use('/',router)
 }
