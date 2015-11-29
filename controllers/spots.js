@@ -49,7 +49,8 @@ var newSpot = function(req, res, next) {
     image_url:"",
     address:"",
   }];
-  res.render('spots/new', {spot:emptySpot, additionalTags:""});
+  res.render('spots/new', {spot:emptySpot, additionalTags:"", nature:"", urban:"", family:"", beach:"",
+            park:"", engagement:"", garden:"", museum:"", wedding:""});
 };
 
 var edit = function(req, res, next) {
@@ -58,8 +59,6 @@ var edit = function(req, res, next) {
       return s._id == req.params.id;
     });
     var defaultTags = ['nature','urban','family','beach','park','engagement','garden','museum','wedding'];
-//    var nature = false, urban = false, family = false, beach = false,
-//        park = false, engagement = false, garden = false, museum = false, wedding = false;
     var nature,urban,family,beach,park,engagement,garden,museum,wedding;
     tags = _.pluck(spots[0].tags,'tag_name');
     nature = (_.indexOf(tags,'nature') >= 0) ? "CHECKED" : "";
@@ -71,7 +70,6 @@ var edit = function(req, res, next) {
     garden = (_.indexOf(tags,'garden') >= 0) ? "CHECKED" : "";
     museum = (_.indexOf(tags,'museum') >= 0) ? "CHECKED" : "";
     wedding = (_.indexOf(tags,'wedding') >= 0) ? "CHECKED" : "";
-//    var additionalTags = _.chain(spots[0].tags).pluck('tag_name').difference(defaultTags).value().join();
     var additionalTags = _.difference(tags,defaultTags).join();
     console.log(additionalTags)
     res.render('spots/edit',{spot:spots[0], additionalTags:additionalTags, nature:nature, urban:urban, family:family,
