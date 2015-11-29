@@ -2,9 +2,7 @@
 <img src="https://i.imgur.com/wodL1a6.png" width="75px"/>
 </p>
 
-(https://morning-spire-1673.herokuapp.com/)
-
-<h1 align=center>Pixel Spot</h1>
+<a href="https://morning-spire-1673.herokuapp.com/"> <h1 align=center>Pixel Spot</h1> </a>
 
 Pixel Spot is a crowd sourced photo location scouting app.  Photographers of any skill level can use this app to  search and share their favorite photo locations with others.  Using Flickr's photo hosting and geo-tagging features in conjunction with Google Maps geo-location function users can find the exact spots of amazing photo locations.  Searching for a spot is  made easy with our built in tag fields as well as giving users the ability to create custom tags.  And, of course, users can also search by location.  If you have a photo shoot coming up find your next shot on Pixel Spot!
 
@@ -12,6 +10,8 @@ ___
 
 ###Installation
 
+- Click on or copy & paste this link to reach our site:
+    - [https://morning-spire-1673.herokuapp.com/](https://morning-spire-1673.herokuapp.com/)
 - Heroku is used for online deployment for the app
     - run `heroku config:set` **for each environment variable**
     - database is running from MongoLab.  **Connecting the database requires the Heroku add-on for MongoLab.  The add-on is free, but it requires you to enter credit card information to validate the account.**
@@ -129,3 +129,4 @@ ___
 - user input needs to be sanitized
 - implement a more robust search feature that matches partial results
 - need better error handling. e.g. search breaks when no input is specified
+
