@@ -127,7 +127,7 @@ var update = function(req, res, next) {
 
 //Delete a new spot
 var destroy = function(req, res) {
-  spotId = req.params.id;
+  spotId = req.query.id;
   User.find({"spots._id":spotId}, function(err, user){
     user[0].spots.id(spotId).remove();
     user[0].save(function(err){
