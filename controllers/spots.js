@@ -57,7 +57,6 @@ var edit = function(req, res, next) {
     var spots = user.spots.filter(function(s){
       return s._id == req.params.id;
     });
-//    nature =
     res.render('spots/edit',{spot:spots[0]});
   });
 };
@@ -70,25 +69,37 @@ var create = function(req, res, next) {
       address = req.body.address,
       rating = 0;
 
-  var defaultTags = req.body.tags;
-  if (!Array.isArray(defaultTags)) { defaultTags = [defaultTags] };
-  defaultTags = aryToTagObj(defaultTags);
-  var additionalTags = strToTagObj(req.body["additional-tags"]);
-  var tags = defaultTags.concat(additionalTags);
+  var tags = [];
+  var defaultTags = "";
+  if (req.body.tags) { defaultTags = req.body.tags; }
+
+  if (defaultTags.length > 0)
+  {
+    if (!Array.isArray(defaultTags)) { defaultTags = [defaultTags] };
+    if (defaultTags.length>0) { tags = aryToTagObj(defaultTags) };
+  }
+
+  var additionalTags = req.body["additional-tags"];
+  if (additionalTags.length>0)
+  {
+    additionalTags = strToTagObj(additionalTags)
+    tags = tags.concat(additionalTags);
+  };
 
   userId = res.locals.user._id;
   address = "";
 
-  User.findById(userId, function(err, user){
-    // FIXME | if i have time later go back and refactor the regex to be something better cause this one is terrible
-    // TODO | add error checking for url to make sure it is valid or the code blows up
     var re = /https:\/\/www\.flickr\.com\/photos\/(.*)/i
     var regexResult = re.exec(flickrUrl)[1].split('/')
 
     photoId = regexResult[1];
+
+  User.findById(userId, function(err, user){
+    // FIXME | if i have time later go back and refactor the regex to be something better cause this one is terrible
+    // TODO | add error checking for url to make sure it is valid or the code blows up
     // get farm, server, and secret from user, filter on photo id
-    var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + env.FLICKR_KEY + "&photo_id=" + photoId + "&format=json&nojsoncallback=1"
-    rp.get(flickrUrl)
+    var flickrApi = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + env.FLICKR_KEY + "&photo_id=" + photoId + "&format=json&nojsoncallback=1"
+    rp.get(flickrApi)
     .then(function(data){
       data = JSON.parse(data);
       // generate url directly to image
@@ -97,8 +108,8 @@ var create = function(req, res, next) {
       lat = data.photo.location.latitude;
       lng = data.photo.location.longitude;
       accuracy = data.photo.location.accuracy;
-      var geoUrl = "http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + lat + "&lng=" + lng + "&username=pixelspot"
-      return rp.get(geoUrl)
+      var geoApi = "http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + lat + "&lng=" + lng + "&username=pixelspot"
+      return rp.get(geoApi)
     })
     .then(function(data){
 //      zipcode = JSON.parse(data).postalCodes[0].postalCode;
@@ -116,7 +127,7 @@ zipcode = ""
         tags: tags //need logic on how to insert multiple tags data into tagSchema
       });
       user.save(function(err) {
-        res.render('/');
+        res.redirect('/');  // TODO: why doesn't render work?  i have to redirect to make it work
       });
     })
   });
@@ -129,12 +140,10 @@ var update = function(req, res, next) {
       flickrUrl = req.body["flickr-url"],
       address = req.body.address,
       rating = 0;
-// TODO | FIX THE TAGS - saves a blank tag if field is left empt
   var tags = [];
   var defaultTags = "";
   if (req.body.tags) { defaultTags = req.body.tags; }
 
-console.log(defaultTags)
   if (defaultTags.length > 0)
   {
     if (!Array.isArray(defaultTags)) { defaultTags = [defaultTags] };
@@ -142,7 +151,6 @@ console.log(defaultTags)
   }
 
   var additionalTags = req.body["additional-tags"];
-console.log(additionalTags)
   if (additionalTags.length>0)
   {
     additionalTags = strToTagObj(additionalTags)
