@@ -58,7 +58,9 @@ var create = function(req, res, next) {
       address = req.body.address,
       rating = 0;
 
-  var defaultTags = aryToTagObj(req.body.tags);
+  var defaultTags = req.body.tags;
+  if (!Array.isArray(defaultTags)) { defaultTags = [defaultTags] };
+  defaultTags = aryToTagObj(defaultTags);
   var additionalTags = strToTagObj(req.body["additional-tags"]);
   var tags = defaultTags.concat(additionalTags);
 
@@ -127,11 +129,11 @@ var update = function(req, res, next) {
 
 //Delete a new spot
 var destroy = function(req, res) {
-  spotId = req.query.id;
+  spotId = req.params.id;
   User.find({"spots._id":spotId}, function(err, user){
     user[0].spots.id(spotId).remove();
     user[0].save(function(err){
-      res.render('welcome/index'); // fix the routes because only welcome index
+      res.json(JSON.stringify(spotId));
     });
   });
 };
@@ -188,7 +190,7 @@ module.exports = {
 // convert array to tag object as key:value pair
 function aryToTagObj(ary)
 {
-  return _.map(ary,function(tag){return {tag_name: tag.toLowerCase()}})
+  return _.map(ary,function(tag){ return {tag_name: tag.toLowerCase()}})
 }
 
 // convert comma delimited string to tag object as key:value pair

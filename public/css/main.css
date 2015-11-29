@@ -215,10 +215,6 @@ p.results {
 /*User show View (user profile) */
 
 
-.box {
-  text-align: center;
-}
-
 #userName {
   text-align: center;
   font-size: 30px;
@@ -226,7 +222,7 @@ p.results {
   padding-top: 10px;
 }
 
-#title{
+#imageTitle{
   padding-top: 24px;
   font-weight: bold;
   font-size: 20px;
@@ -239,8 +235,10 @@ p.results {
   top: 300px;
 }
 
-.container-fluid {
+
+.post {
   padding-left: 10%;
+  text-align: center;
 }
 
 .buttons {
@@ -260,6 +258,18 @@ p.results {
 
 
 /* index views */
+
+#indexView {
+  width: 1080px;
+}
+
+#indexHeader{
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 10px;
+  width: 1080px;
+}
 
 .indexTemplate {
   display:inline-block;

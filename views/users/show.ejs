@@ -10,12 +10,14 @@
   <div  class="container-fluid box" id="userName">
    <p> <$= otherUser.name $>'s Spots!</p>
   </div>
-    <div class="container-fluid box">
+    <div class="container-fluid box post">
       <$ otherUser.spots.forEach(function(spot) { $>
-      <div class="col-md-4 indexSpotContainer box-shadow--4dp">
-        <p id="title"><$= spot.title $></p>
+      <div class="col-md-4 indexSpotContainer box-shadow--4dp" id="<$= spot._id $>">
+        <p id="imageTitle"><$= spot.title$></p>
+        <a href="/spots/<$= spot._id $>">
         <img class="maxImageWidth box-shadow--2dp"src="<$= spot.image_url $>" >
-        <p id="description">"<$= spot.description $>"</p>
+        </a>
+        <p id="description">"<$= spot.description$>"</p>
         <p class="buttons"><input type="button" class="btn btn-primary" value="Edit" name="btn-advanced-edit" data-id="<$= spot._id $>">
         <input type="button" class="btn btn-primary" value="Delete" name="btn-advanced-delete" data-id="<$= spot._id $>"></p>
 
