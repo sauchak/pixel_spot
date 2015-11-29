@@ -264,9 +264,26 @@ p.results {
 
 
 /* index views */
+.jumbotron {
+  margin-top: 10px;
+  background-image: linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)), url("https://i.imgur.com/O62ezqz.png");
+  background-size: cover;
+}
+
+#indexJumbo {
+  font-size: 100px;
+  font-weight: bold;
+  letter-spacing: 15px;
+}
+
+#pJumbo{
+  font-size: 35px;
+  letter-spacing: 10px;
+}
 
 #indexView {
   width: 1080px;
+  text-align: center;
 }
 
 #indexHeader{
@@ -289,6 +306,8 @@ p.results {
   border: 1px solid black;
   border-radius: 5px;
   margin: 5px;
+  background-color: white;
+
 }
 
 .welcomeIndexSpotContainer {
@@ -300,7 +319,7 @@ p.results {
   margin: 5px;
   text-align: center;
   bottom: 10px;
-
+  background-color: white;
 }
 
 .maxImageWidth {
