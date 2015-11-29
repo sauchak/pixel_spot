@@ -9,7 +9,7 @@ var spotsController   = require('../controllers/spots');
 
 module.exports = function(app, passport) {
   app.use(function(req, res, next){
-    console.log("set user to " + req.user);
+//    console.log("set user to " + req.user);
     res.locals.user = req.user;
     next();
   });

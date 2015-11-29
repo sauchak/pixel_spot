@@ -95,7 +95,7 @@ $(document).ready(function() {
       method:'DELETE',
     }).done(
       function(data){
-        consoloe.log("deleted")
+        $("#"+JSON.parse(data)).remove();
       }
     );
   })
