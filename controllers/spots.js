@@ -80,15 +80,15 @@ var create = function(req, res, next) {
   address = "";
 
   User.findById(userId, function(err, user){
-    // FIXME | CHANGE VARIABLE NAMES if i have time later go back and refactor the regex to be something better cause this one is terrible
+    // FIXME | if i have time later go back and refactor the regex to be something better cause this one is terrible
     // TODO | add error checking for url to make sure it is valid or the code blows up
     var re = /https:\/\/www\.flickr\.com\/photos\/(.*)/i
     var regexResult = re.exec(flickrUrl)[1].split('/')
 
-    userId = regexResult[0];
     photoId = regexResult[1];
     // get farm, server, and secret from user, filter on photo id
-    rp.get("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + env.FLICKR_KEY + "&photo_id=" + photoId + "&format=json&nojsoncallback=1")
+    var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + env.FLICKR_KEY + "&photo_id=" + photoId + "&format=json&nojsoncallback=1"
+    rp.get(flickrUrl)
     .then(function(data){
       data = JSON.parse(data);
       // generate url directly to image
@@ -97,8 +97,8 @@ var create = function(req, res, next) {
       lat = data.photo.location.latitude;
       lng = data.photo.location.longitude;
       accuracy = data.photo.location.accuracy;
-
-      return rp.get("http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + lat + "&lng=" + lng + "&username=pixelspot")
+      var geoUrl = "http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + lat + "&lng=" + lng + "&username=pixelspot"
+      return rp.get(geoUrl)
     })
     .then(function(data){
 //      zipcode = JSON.parse(data).postalCodes[0].postalCode;
@@ -124,7 +124,75 @@ zipcode = ""
 
 // Edit a spot
 var update = function(req, res, next) {
-  console.log("Title is " + req.body.title)
+  var title = req.body.title,
+      description = req.body.description,
+      flickrUrl = req.body["flickr-url"],
+      address = req.body.address,
+      rating = 0;
+// TODO | FIX THE TAGS - saves a blank tag if field is left empt
+  var tags = [];
+  var defaultTags = "";
+  if (req.body.tags) { defaultTags = req.body.tags; }
+
+console.log(defaultTags)
+  if (defaultTags.length > 0)
+  {
+    if (!Array.isArray(defaultTags)) { defaultTags = [defaultTags] };
+    if (defaultTags.length>0) { tags = aryToTagObj(defaultTags) };
+  }
+
+  var additionalTags = req.body["additional-tags"];
+console.log(additionalTags)
+  if (additionalTags.length>0)
+  {
+    additionalTags = strToTagObj(additionalTags)
+    tags = tags.concat(additionalTags);
+  };
+
+  userId = res.locals.user._id;
+  address = "";
+
+    var re = /https:\/\/www\.flickr\.com\/photos\/(.*)/i
+    var regexResult = re.exec(flickrUrl)[1].split('/')
+
+    photoId = regexResult[1];
+
+  User.findById(userId, function(err, user){
+    // FIXME | if i have time later go back and refactor the regex to be something better cause this one is terrible
+    // TODO | add error checking for url to make sure it is valid or the code blows up
+    // get farm, server, and secret from user, filter on photo id
+    var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + env.FLICKR_KEY + "&photo_id=" + photoId + "&format=json&nojsoncallback=1"
+    rp.get(flickrUrl)
+    .then(function(data){
+      data = JSON.parse(data);
+      // generate url directly to image
+      imageUrl = "https://farm" + data.photo.farm + ".staticflickr.com/" + data.photo.server + "/" + photoId + "_" + data.photo.secret + ".jpg";
+      // get getlocation using flickr
+      lat = data.photo.location.latitude;
+      lng = data.photo.location.longitude;
+      accuracy = data.photo.location.accuracy;
+      var geoUrl = "http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + lat + "&lng=" + lng + "&username=pixelspot"
+      return rp.get(geoUrl)
+    })
+    .then(function(data){
+//      zipcode = JSON.parse(data).postalCodes[0].postalCode;
+zipcode = ""
+      var spotId = req.params.id
+      var spot = user.spots.id(spotId)
+      spot.title = req.body.title,
+      spot.description = req.body.description,
+      spot.image_url = imageUrl,
+      spot.address = req.body.address,
+      spot.rating = 0,
+      spot.tags = tags;
+      user.save(function(err, user) {
+        res.json(JSON.stringify(res.locals.user._id));
+      });
+    })
+  });
+
+
+/*
   User.findById(res.locals.user._id, function(err, user){
     var spotId = req.params.id
     var spot = user.spots.id(spotId)
@@ -138,6 +206,7 @@ var update = function(req, res, next) {
       res.json(JSON.stringify(res.locals.user._id));
     });
   });
+*/
 };
 
 //Delete a new spot
