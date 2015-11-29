@@ -216,6 +216,11 @@ p.results {
   float: right;
 }
 
+#downvote:hover,
+#upvote:hover {
+  cursor: pointer;
+}
+
 
 /* ******************* */
 /*User show View (user profile) */
