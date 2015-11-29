@@ -15,7 +15,7 @@ var index = function (req, res, next) {
         return parseFloat(top.rating) - parseFloat(bot.rating);
       });
     });
-    res.render('welcome/index', {spots: spots});
+    res.render('welcome/index', {spots:spots});
   });
 };
 
@@ -49,7 +49,7 @@ var newSpot = function(req, res, next) {
     image_url:"",
     address:"",
   }];
-  res.render('spots/new', {spot:emptySpot});
+  res.render('spots/new', {spot:emptySpot, additionalTags:""});
 };
 
 var edit = function(req, res, next) {
@@ -57,7 +57,9 @@ var edit = function(req, res, next) {
     var spots = user.spots.filter(function(s){
       return s._id == req.params.id;
     });
-    res.render('spots/edit',{spot:spots[0]});
+    var defaultTags = ['nature','urban','family','beach','park','engagement','garden','museum','wedding'];
+    var additionalTags = _.chain(spots[0].tags).pluck('tag_name').difference(defaultTags).value().join();
+    res.render('spots/edit',{spot:spots[0], additionalTags:additionalTags});
   });
 };
 
@@ -221,6 +223,7 @@ zipcode = ""
 var destroy = function(req, res) {
   spotId = req.params.id;
   User.find({"spots._id":spotId}, function(err, user){
+    if (error) { console.log(error); }
     user[0].spots.id(spotId).remove();
     user[0].save(function(err){
       res.json(JSON.stringify(spotId));
