@@ -71,10 +71,10 @@
     </div>
   </main>
 
-  <div class="container-fluid box results" id="spotscontainer">
+  <div class="results" id="spotscontainer">
+    <div class="container-fluid box" id="searchView">
     <$ s = JSON.parse(spots) $>
     <p class="searchresults">Search results: <$= s.length $>&nbsp;<$ if (s.length == 1) { $> match found<$ } else { $>matches found<$ } $></p>
-    <div class="container-fluid box" id="indexView">
       <div class="row indexTemplate">
       <$ s.forEach(function (spot) { $>
         <div class="col-md-4 indexSpotContainer box-shadow--4dp">
@@ -102,8 +102,8 @@
   <$- include('../partials/scripts') $>
 
   <script type="text/template" id="spot-template">
+    <div class="container-fluid box" id="searchView">
     <p class="searchresults">Search results: <%= _.size(spots) %>&nbsp;<% if (spots.length == 1) { %> match found<% } else { %>matches found<% } %></p>
-    <div class="container-fluid box" id="indexView">
       <div class="row indexTemplate">
       <% _.forEach(spots,function (spot) { %>
         <div class="col-md-4 indexSpotContainer box-shadow--4dp">
