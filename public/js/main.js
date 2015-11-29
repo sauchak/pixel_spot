@@ -89,6 +89,21 @@ $(document).ready(function() {
     vote($(this).attr("data-id"),$(this).attr("data-value"));
   })
 
+  $("[name=btn-advanced-delete]").on("click",function(){
+    $.ajax({
+      url:"/spots/" + $(this).attr("data-id"),
+      method:'DELETE',
+    }).done(
+      function(data){
+        consoloe.log("deleted")
+      }
+    );
+  })
+
+  $("#btn-advanced-edit").on("click",function(){
+    alert("edit")
+  })
+
   function vote(id,value)
   {
     $.ajax({
