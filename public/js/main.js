@@ -9,43 +9,7 @@ $(document).ready(function() {
   $destination = $('#spotscontainer');
   $templateEl  = $('#spot-template');
   renderLi = _.template($templateEl.html());
-/*
-  $.ajax({
-    url:"/spots",
-    method:'GET',
-    dataType: 'json',
-    context: document.body
-  }).done(
-    function(data){
-      data = JSON.parse(data);
 
-      data.forEach(function(d)
-      {
-        renderedHtmlView = renderLi({spot_title:d.title, description:d.description, image_url:d.image_url});
-        $destination.append(renderedHtmlView);
-      });
-
-    }
-  );
-
-  $.ajax({
-    url:"/spots/search/all",
-    method:'GET',
-    dataType: 'json',
-    context: document.body
-  }).done(
-    function(data){
-      data = JSON.parse(data);
-
-      data.forEach(function(d)
-      {
-        renderedHtmlView = renderLi({spot_title:d.title, description:d.description, image_url:d.image_url});
-        $destination.append(renderedHtmlView);
-      });
-
-    }
-  );
-*/
   $("#btn-search").on("click", function(evt){
     document.location.href="/spots/search/all?tags=" + $("#input-search").val();
   });
@@ -76,7 +40,7 @@ $(document).ready(function() {
 
   $('#input-search').keypress(function (e) {
     if (e.which == 13) {
-      document.location.href="/spots/search/all?tags=" + $("#input-search").val();
+      document.location.href = "/spots/search/all?tags=" + $("#input-search").val();
       return false;
     }
   });
@@ -100,8 +64,24 @@ $(document).ready(function() {
     );
   })
 
-  $("#btn-advanced-edit").on("click",function(){
-    alert("edit")
+  $("[name=btn-advanced-edit]").on("click",function(){
+    document.location.href = "/spots/" + $(this).attr("data-id") + "/edit";
+  })
+
+  $("#btn-edit").on("click",function(){
+    var data = $('#edit-spot-form').serializeArray();
+    console.log(data)
+//    debugger;
+    $.ajax({
+      url:"/spots/" + $(this).attr("data-id"),
+      dataType: 'json',
+      data: data,
+      method:'PUT',
+    }).done(
+      function(data){
+        document.location.href = "/users/" + JSON.parse(data);
+      }
+    );
   })
 
   function vote(id,value)

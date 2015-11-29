@@ -42,7 +42,24 @@ var vote = function(req, res, next) {
 };
 
 var newSpot = function(req, res, next) {
-  res.render('spots/new');
+  var emptySpot = [{
+    title:"",
+    description: "T",
+    flickr_url: "",
+    image_url:"",
+    address:"",
+  }];
+  res.render('spots/new', {spot:emptySpot});
+};
+
+var edit = function(req, res, next) {
+  User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
+    var spots = user.spots.filter(function(s){
+      return s._id == req.params.id;
+    });
+//    nature =
+    res.render('spots/edit',{spot:spots[0]});
+  });
 };
 
 //Create a new spot
@@ -99,7 +116,7 @@ zipcode = ""
         tags: tags //need logic on how to insert multiple tags data into tagSchema
       });
       user.save(function(err) {
-        res.render('spots/new');
+        res.render('/');
       });
     })
   });
@@ -107,7 +124,8 @@ zipcode = ""
 
 // Edit a spot
 var update = function(req, res, next) {
-  User.findById(userId, function(err, user){
+  console.log("Title is " + req.body.title)
+  User.findById(res.locals.user._id, function(err, user){
     var spotId = req.params.id
     var spot = user.spots.id(spotId)
         spot.title = req.body.title,
@@ -117,7 +135,7 @@ var update = function(req, res, next) {
         spot.rating = 0,
         spot.tags = req.body.tags;
     user.save(function(err, user) {
-      res.render('welcome/index'); // fix the routes because only welcome index
+      res.json(JSON.stringify(res.locals.user._id));
     });
   });
 };
@@ -173,6 +191,7 @@ module.exports = {
   show: show,
   vote: vote,
   create: create,
+  edit: edit,
   new: newSpot,
   update: update,
   destroy: destroy,

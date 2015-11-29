@@ -7,9 +7,9 @@
 <body>
 <$- include('../partials/header', {subHeading: 'Welcome'}) $>
   <main>
-    <form id="new-spot-form" class="form new-spot" action="/spots/new" method="post">
+    <form id="edit-spot-form" class="form new-spot">
       <$- include('../partials/spot') $>
-      <input type="submit" class="btn btn-primary" id="btn-create" value="Submit">
+      <input type="button" class="btn btn-primary" id="btn-edit" value="Submit" data-id="<$= spot._id $>">
     </form>
   </main>
 
