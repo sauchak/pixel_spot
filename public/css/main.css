@@ -299,14 +299,17 @@ p.results {
 
 .maxImageWidth {
   margin-top: 20px;
-  max-height: 275px;
-  max-width: 300px;
 }
 
 #indexText {
   position: absolute;
   width: 325px;
   bottom: 10px;
+}
+
+#indexTitle {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 #containerButton {
