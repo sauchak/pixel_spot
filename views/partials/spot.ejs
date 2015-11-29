@@ -1,23 +1,21 @@
 
-     <fieldset class="form-group row search-info">
+      <fieldset class="form-group row search-info">
         <label for="title" class="col-xs-4 form-control-label">Spot title:</label>
         <div class="col-xs-8">
-          <input id="title" name="title" type="text">
+          <input id="title" name="title" type="text" value="<$= spot.title $>">
         </div>
-        <br><br>
-        <label for="flickr-url" class="col-xs-4 form-control-label">flickr url:</label>
+
+        <label for="flickr-url" class="col-xs-4 form-control-label">Flickr url:</label>
         <div class="col-xs-8">
-          <input id="flickr-url" name="flickr-url" type="text">
+          <input id="flickr-url" name="flickr-url" type="text" value="<$= spot.flickr_url $>">
         </div>
-        <br><br>
-        <label for="location" class="col-xs-4 form-control-label">Spot location:</label>
+        <label for="address" class="col-xs-4 form-control-label">Spot address:</label>
         <div class="col-xs-8">
-          <input id="location" name="location" type="text">
+          <input id="address" name="address" type="text" value="<$= spot.address $>">
         </div>
-        <br><br>
         <label for="description" class="col-xs-4 form-control-label">Spot description:</label>
         <div class="col-xs-8">
-          <input id="new-description" name="description" type="text">
+          <input id="new-description" name="description" type="text" value="<$= spot.description $>">
         </div>
       </fieldset>
 
@@ -70,4 +68,3 @@
           <input id="additional-tags" name="additional-tags" type="text">
         </div>
       </fieldset>
-
