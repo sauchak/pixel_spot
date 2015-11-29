@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 var localEnvVars = {
-  TITLE:      'pixel_spot',
+  TITLE:      'Pixel Spot',
   SAFE_TITLE: 'pixel_spot'
 };
 
