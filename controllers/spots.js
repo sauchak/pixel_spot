@@ -223,7 +223,6 @@ zipcode = ""
 var destroy = function(req, res) {
   spotId = req.params.id;
   User.find({"spots._id":spotId}, function(err, user){
-    if (error) { console.log(error); }
     user[0].spots.id(spotId).remove();
     user[0].save(function(err){
       res.json(JSON.stringify(spotId));
