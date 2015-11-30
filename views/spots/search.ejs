@@ -77,12 +77,8 @@
     <p class="searchresults">Search results: <$= s.length $>&nbsp;<$ if (s.length == 1) { $> match found<$ } else { $>matches found<$ } $></p>
       <div class="row indexTemplate">
       <$ s.forEach(function (spot) { $>
-
         <div class="col-md-4 indexSpotContainer box-shadow--4dp">
-          <div>
             <a href="/spots/<$= spot._id $>"><img class="maxImageWidth box-shadow--2dp img-thumbnail" src="<$= spot.image_url $>"></a>
-          </div>
-
           <div id="indexText">
             <p id="indexTitle"> <$= spot.title $></p>
             <span> Tags:
