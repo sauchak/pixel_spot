@@ -71,7 +71,6 @@ var edit = function(req, res, next) {
     museum = (_.indexOf(tags,'museum') >= 0) ? "CHECKED" : "";
     wedding = (_.indexOf(tags,'wedding') >= 0) ? "CHECKED" : "";
     var additionalTags = _.difference(tags,defaultTags).join();
-    console.log(additionalTags)
     res.render('spots/edit',{spot:spots[0], additionalTags:additionalTags, nature:nature, urban:urban, family:family,
                     beach:beach, park:park, engagement:engagement, garden:garden, museum:museum, wedding:wedding });
   });
@@ -199,14 +198,16 @@ var update = function(req, res, next) {
       return rp.get(geoUrl)
     })
     .then(function(data){
-//      zipcode = JSON.parse(data).postalCodes[0].postalCode;
-zipcode = ""
+      console.log(data)
+      zipcode = JSON.parse(data).postalCodes[0].postalCode;
+//zipcode = ""
       var spotId = req.params.id
       var spot = user.spots.id(spotId)
       spot.title = req.body.title,
       spot.description = req.body.description,
       spot.image_url = imageUrl,
       spot.address = req.body.address,
+      spot.zipcode = zipcode,
       spot.rating = 0,
       spot.tags = tags;
       user.save(function(err, user) {
@@ -250,12 +251,14 @@ var advancedSearch = function (req, res, next) {
   {
     defaultTags = strToTags(req.query.defaultTags);
   }
+  var zipcode = req.query.zipcode;
 
   var addTags = strToTags(req.query.additionalTags);
   tags = defaultTags.concat(addTags);
 
   var tagQuery = {"spots.tags.tag_name":{"$in":tags}};
-  User.find(tags, function(error, users){
+  console.log(tags)
+  User.find(tagQuery, function(error, users){
     if (error) { console.log(error); }
     var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
     res.json(JSON.stringify(spots));

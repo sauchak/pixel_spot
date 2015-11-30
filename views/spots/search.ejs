@@ -78,9 +78,7 @@
       <div class="row indexTemplate">
       <$ s.forEach(function (spot) { $>
         <div class="col-md-4 welcomeIndexSpotContainer box-shadow--4dp">
-          <div>
-            <a href="/spots/<$= spot._id $>"><img class="maxImageWidth box-shadow--2dp img-thumbnail" src=<$= spot.image_url $>></a>
-          </div>
+            <a href="/spots/<$= spot._id $>"><img class="maxImageWidth box-shadow--2dp img-thumbnail" src="<$= spot.image_url $>"></a>
           <div id="indexText">
             <p id="title"> <$= spot.title $></p>
             <span> Rating: <$= spot.rating $></span>
@@ -100,7 +98,7 @@
       <% _.forEach(spots,function (spot) { %>
         <div class="col-md-4 welcomeIndexSpotContainer box-shadow--4dp">
           <div>
-            <a href="/spots/<%= spot._id %>"><img class="maxImageWidth box-shadow--2dp" src=<%= spot.image_url %>></a>
+            <a href="/spots/<%= spot._id %>"><img class="maxImageWidth box-shadow--2dp img-thumbnail" src=<%= spot.image_url %>></a>
           </div>
           <div id="indexText">
             <p id="title"> <%= spot.title %></p>
