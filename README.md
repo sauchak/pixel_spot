@@ -125,11 +125,14 @@ ___
 ###Unsolved Problems/Major Hurdles
 
 - We require a specific url pattern to be able to parse the url for the information we need
-- When using geo-location the data doesn't always map exactly back to a specific zipcode.  There's not a one-to-one relationship between lattitude/longitude and zipcodes 
+- When using geo-location the data doesn't always map exactly back to a specific zipcode.  There's not a one-to-one relationship between latitude/longitude and zipcodes 
 - user input needs to be sanitized
 - implement a more robust search feature that matches partial results
-- need better error handling. e.g. app breaks when invalid Flickr is specified
+- need better error handling. e.g. app breaks when invalid Flickr url is specified
 - add navigation buttons (like back/cancel) on some pages
-- allow users to specify 
 - add search by zipcode and/or radius
-- 
+- add navigation buttons to page through search results when more than 1 page worth of records are found
+- possibly convert in single page app, or at least refactor to reduce the number of full page renders
+- code needs lots of refactoring, especially some code in the controllers is not DRY.
+- controls for default tags need to be re-coded to pull values from database instead of being hard-coded.
+- need to verify before deleting
