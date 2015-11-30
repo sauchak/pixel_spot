@@ -123,7 +123,7 @@ h3 {
   border: 1px solid black;
   padding: 20px 20px 10px 20px;
   min-width: 400px;
-  /*width: 770px;*/
+  width: 1080px;
   max-width: 770px;
   margin: 0 auto;
   margin-top: 90px;
@@ -152,13 +152,13 @@ h3 {
 
 .results {
   text-align: center;
-  border: 1px solid black;
-  padding: 10px 20px 10px 20px;
-  min-width: 400px;
-/*  max-width: 770px; */
+/*  border: 1px solid black;
+*/  padding: 10px 20px 10px 20px;
+/*  min-width: 400px;
+  width: 1080px;*/
   margin: 0 auto;
   margin-top: 20px;
-  background-color: #FFFFFF;
+  background-color: #F5F5F5;
 }
 
 p.results {
@@ -170,7 +170,15 @@ p.results {
 .searchresults {
   text-align: center;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 2.5em;
+}
+
+#searchView {
+  min-width: 400px;
+  /* width: 1080px; */
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /*Show page styling with map and advanced image details*/
@@ -293,7 +301,7 @@ p.results {
 
 #indexHeader{
   text-align: center;
-  font-size: 30px;
+  font-size: 2.5em;
   font-weight: bold;
   padding-top: 10px;
   width: 1080px;
