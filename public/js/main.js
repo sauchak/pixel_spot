@@ -54,14 +54,17 @@ $(document).ready(function() {
   })
 
   $("[name=btn-advanced-delete]").on("click",function(){
-    $.ajax({
-      url:"/spots/" + $(this).attr("data-id"),
-      method:'DELETE',
-    }).done(
-      function(data){
-        $("#"+JSON.parse(data)).remove();
-      }
-    );
+    if (confirm("Delete this record?"))
+    {
+      $.ajax({
+        url:"/spots/" + $(this).attr("data-id"),
+        method:'DELETE',
+      }).done(
+        function(data){
+          $("#"+JSON.parse(data)).remove();
+        }
+      );
+    }
   })
 
   $("[name=btn-advanced-edit]").on("click",function(){
@@ -71,7 +74,6 @@ $(document).ready(function() {
   $("#btn-edit").on("click",function(){
     var data = $('#edit-spot-form').serializeArray();
     console.log(data)
-//    debugger;
     $.ajax({
       url:"/spots/" + $(this).attr("data-id"),
       dataType: 'json',
@@ -102,3 +104,5 @@ $(document).ready(function() {
     );
   }
 })
+
+
