@@ -252,12 +252,13 @@ var advancedSearch = function (req, res, next) {
     defaultTags = strToTags(req.query.defaultTags);
   }
   var zipcode = req.query.zipcode;
-
-  var addTags = strToTags(req.query.additionalTags);
-  tags = defaultTags.concat(addTags);
-
+  if (req.query.additionalTags.length > 0)
+  {
+    var addTags = strToTags(req.query.additionalTags);
+    defaultTags = defaultTags.concat(addTags);
+  }
+  tags = defaultTags;
   var tagQuery = {"spots.tags.tag_name":{"$in":tags}};
-  console.log(tags)
   User.find(tagQuery, function(error, users){
     if (error) { console.log(error); }
     var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
