@@ -10,29 +10,36 @@
       <div class="showContainer box-shadow--4dp">
 
         <div id="mainImage">
-            <img class="showImage" src="<$= spot.image_url $>" />
+            <img class="showImage box-shadow--2dp img-thumbnail" src="<$= spot.image_url $>" />
         </div>
 
+        <p id="showTitle"> <$= spot.title $></p>
+        <hr id="showLine">
         <div class="imageDetails">
           <div id="showDetails">
 
+<<<<<<< HEAD
             <p id="showTitle">Title: <$= spot.title $></p>
             submitted by: <$= name $>
             <br>
             <$= spot.description $>
             <br>
             <$= spot.address $>
+=======
+            <p> <$= spot.description $> </p>
+            <p> <$= spot.address $> </p>
+>>>>>>> e56dc6eb458693f23e1b59d8cead37868157b5ca
             <br>
-            <!--<a href="/spots/<$= spot._id $>/downvote" class="like">-->
-            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" data-value="-1" data-id="<$= spot._id $>" id="downvote"></span>
-            <!--</a>-->
-            &nbsp;&nbsp;<span class="like" id="rating"><$= spot.rating $></span>&nbsp;&nbsp;
             <!--<a href="/spots/<$= spot._id $>/upvote" class="like">-->
             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" data-value="1" data-id="<$= spot._id $>" id="upvote"></span>
             <!--</a>-->
+            &nbsp;&nbsp;<span class="like" id="rating"><$= spot.rating $></span>&nbsp;&nbsp;
+            <!--<a href="/spots/<$= spot._id $>/downvote" class="like">-->
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" data-value="-1" data-id="<$= spot._id $>" id="downvote"></span>
+            <!--</a>-->
             <br>
             <br>
-          <span> Tags:
+          <span style="font-size: 16px"> Tags:
             <$ var tagString = "" $>
             <$ spot.tags.forEach(function (tag) { $>
             <$ tagString += (tag.tag_name + ", ");$>
@@ -42,7 +49,7 @@
           <br>
           </div>
 
-          <div class="map" id="map" data-name="<$= spot.title $>"
+          <div class="map box-shadow--2dp img-thumbnail" id="map" data-name="<$= spot.title $>"
           data-lat="<$= spot.lat $>" data-lon="<$= spot.lng $>">
           </div>
         </div>
