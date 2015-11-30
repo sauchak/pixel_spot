@@ -15,6 +15,7 @@ var index = function (req, res, next) {
         return parseFloat(top.rating) - parseFloat(bot.rating);
       });
     });
+    spots = _.first(spots,15);
     res.render('welcome/index', {spots:spots});
   });
 };
@@ -239,7 +240,7 @@ var search = function (req, res, next) {
 
   User.find(tagQuery, function(error, users){
     if (error) { console.log(error); }
-    var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
+    var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse().first(100);
     res.render('spots/search', {spots:JSON.stringify(spots)})
   });
 };
@@ -261,7 +262,7 @@ var advancedSearch = function (req, res, next) {
   var tagQuery = {"spots.tags.tag_name":{"$in":tags}};
   User.find(tagQuery, function(error, users){
     if (error) { console.log(error); }
-    var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
+    var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse().first(100);
     res.json(JSON.stringify(spots));
   });
 };
