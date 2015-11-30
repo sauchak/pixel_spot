@@ -135,4 +135,4 @@ ___
 - possibly convert in single page app, or at least refactor to reduce the number of full page renders
 - code needs lots of refactoring, especially some code in the controllers is not DRY.
 - controls for default tags need to be re-coded to pull values from database instead of being hard-coded.
-- need to verify before deleting
+- create better confirm dialog for deleting
