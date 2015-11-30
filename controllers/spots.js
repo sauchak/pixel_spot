@@ -78,7 +78,7 @@ var edit = function(req, res, next) {
 
 //Create a new spot
 var create = function(req, res, next) {
-  var title = req.body.title,
+  var title = req.body.title.substring(0,40),
       description = req.body.description,
       flickrUrl = req.body["flickr-url"],
       address = req.body.address,
@@ -127,8 +127,8 @@ var create = function(req, res, next) {
       return rp.get(geoApi)
     })
     .then(function(data){
-//      zipcode = JSON.parse(data).postalCodes[0].postalCode;
-zipcode = ""
+      zipcode = JSON.parse(data).postalCodes[0].postalCode;
+//zipcode = ""
       user.spots.push({
         title: title,
         description: description,
@@ -150,7 +150,7 @@ zipcode = ""
 
 // Edit a spot
 var update = function(req, res, next) {
-  var title = req.body.title,
+  var title = req.body.title.substring(0,40),
       description = req.body.description,
       flickrUrl = req.body["flickr-url"],
       address = req.body.address,
@@ -203,10 +203,10 @@ var update = function(req, res, next) {
 //zipcode = ""
       var spotId = req.params.id
       var spot = user.spots.id(spotId)
-      spot.title = req.body.title,
-      spot.description = req.body.description,
+      spot.title = title,
+      spot.description = description,
       spot.image_url = imageUrl,
-      spot.address = req.body.address,
+      spot.address = address,
       spot.zipcode = zipcode,
       spot.rating = 0,
       spot.tags = tags;
