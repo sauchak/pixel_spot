@@ -53,9 +53,9 @@ a.like + span.like {
 }
 
 #nav-right {
-  text-align: right;
+  text-align: center;
   padding-top: 15px;
-  padding-left: 196px;
+  padding-left: 22%;
   font-size: 17px;
 }
 
