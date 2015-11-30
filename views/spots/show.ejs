@@ -18,8 +18,11 @@
         <div class="imageDetails">
           <div id="showDetails">
 
-            <p> <$= spot.description $> </p>
-            <p> <$= spot.address $> </p>
+            submitted by: <a style="color:#c0c0c0;text-decoration:none" href="/users/<$= userid $>"><$= name $></a>
+            <br>
+            <$= spot.description $>
+            <br>
+            <$= spot.address $>
             <br>
             <!--<a href="/spots/<$= spot._id $>/upvote" class="like">-->
             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" data-value="1" data-id="<$= spot._id $>" id="upvote"></span>

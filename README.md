@@ -136,3 +136,4 @@ ___
 - code needs lots of refactoring, especially some code in the controllers is not DRY.
 - controls for default tags need to be re-coded to pull values from database instead of being hard-coded.
 - create better confirm dialog for deleting
+- add feedback messages to users (e.g. letting them know they must login to vote)

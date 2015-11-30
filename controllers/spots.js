@@ -22,11 +22,11 @@ var index = function (req, res, next) {
 
 //Show one spot
 var show = function(req, res, next) {
-  User.findOne({"spots._id":req.params.id}).select('spots').exec(function(err, user){
+  User.findOne({"spots._id":req.params.id}).select('name spots').exec(function(err, user){
     var spots = user.spots.filter(function(s){
       return s._id == req.params.id;
     });
-    res.render('spots/show', {spot: spots[0]});
+    res.render('spots/show', {spot: spots[0], name:user.name, userid:user._id});
   });
 };
 
