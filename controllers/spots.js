@@ -26,7 +26,7 @@ var show = function(req, res, next) {
     var spots = user.spots.filter(function(s){
       return s._id == req.params.id;
     });
-    res.render('spots/show', {spot: spots[0], name:user.name});
+    res.render('spots/show', {spot: spots[0], name:user.name, userid:user._id});
   });
 };
 
