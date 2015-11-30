@@ -337,6 +337,8 @@ p.results {
 
 .maxImageWidth {
   margin-top: 20px;
+  max-height: 215px;
+  max-width: 300px;
 }
 
 #indexText {
