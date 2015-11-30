@@ -56,6 +56,8 @@ $(document).ready(function() {
   var spotId;
   $('#modal-delete').on('show.bs.modal', function(evt) {
     spotId = $(evt.relatedTarget).data('id');
+    spotTitle = $(evt.relatedTarget).data('title');
+    $(".modal-body").html('Delete "' + spotTitle + '"?');
   });
 
   $('#confirm').on('click', function(e) {
