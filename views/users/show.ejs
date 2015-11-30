@@ -19,10 +19,28 @@
         </a>
         <p id="imageTitle"><$= spot.title $></p>
         <p class="buttons"><input type="button" class="btn btn-primary" value="Edit" name="btn-advanced-edit" data-id="<$= spot._id $>">
-        <input type="button" class="btn btn-primary" value="Delete" name="btn-advanced-delete" data-id="<$= spot._id $>"></p>
+        <input type="button" class="btn btn-primary" value="Delete" name="btn-advanced-delete" data-title="<$= spot.title $>" data-id="<$= spot._id $>" data-toggle="modal" data-target="#modal-delete"></p>
       </div>
       <$ }); $>
     </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="modal-delete">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Confirm Deletion</h4>
+        </div>
+        <div class="modal-body">
+          <p>Delete record?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirm">Delete</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 </main>
 
   <$- include('../partials/scripts') $>

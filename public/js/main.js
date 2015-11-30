@@ -53,16 +53,21 @@ $(document).ready(function() {
     vote($(this).attr("data-id"),$(this).attr("data-value"));
   })
 
-  $("[name=btn-advanced-delete]").on("click",function(){
+  var spotId;
+  $('#modal-delete').on('show.bs.modal', function(evt) {
+    spotId = $(evt.relatedTarget).data('id');
+    spotTitle = $(evt.relatedTarget).data('title');
+    $(".modal-body").html('Delete "' + spotTitle + '"?');
+  });
+
+  $('#confirm').on('click', function(e) {
     $.ajax({
-      url:"/spots/" + $(this).attr("data-id"),
+      url:"/spots/" + spotId,
       method:'DELETE',
-    }).done(
-      function(data){
+    }).done(function(data){
         $("#"+JSON.parse(data)).remove();
-      }
-    );
-  })
+    });
+  });
 
   $("[name=btn-advanced-edit]").on("click",function(){
     document.location.href = "/spots/" + $(this).attr("data-id") + "/edit";
@@ -71,7 +76,6 @@ $(document).ready(function() {
   $("#btn-edit").on("click",function(){
     var data = $('#edit-spot-form').serializeArray();
     console.log(data)
-//    debugger;
     $.ajax({
       url:"/spots/" + $(this).attr("data-id"),
       dataType: 'json',
@@ -102,3 +106,5 @@ $(document).ready(function() {
     );
   }
 })
+
+
