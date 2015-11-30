@@ -1,38 +1,41 @@
 <header>
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="col-md-4" id="nav-left">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
-      <img class="logoImage" id="logoPin" src="/images/logopin.png" />
+      <div class="col-md-4" id="nav-left">
+        <a href="/"><img class="logoImage" id="logoPin" src="/images/logopin.png" /></a>
+        <a class="navbar-brand" id="navLinks" href="/">Pixel Spot</a>
+        <a class="navbar-brand" id="navLinks" href="/spots/new">Make new Spot</a>
+      </div>
 
-      <a class="navbar-brand" id="navLinks" href="/">Pixel Spot</a>
+      <button class="navbar-toggle " data-toggle="collapse" data-target=".navHeaderCollapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
 
-      <a class="navbar-brand" id="navLinks" href="/spots/new">Make new Spot</a>
-
-        <!-- <img class"navbar brand" src="#http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/simple-red-square-icons-people-things/129309-simple-red-square-icon-people-things-camera1-sc49.png"> -->
-    </div>
-
-    <div class="col-md-4" id="nav-center">
-      <form class="navbar-form navbar-left" role="search">
+      <div class="collapse navbar-collapse navHeaderCollapse col-md-4" id="nav-center">
+        <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search" id="input-search">
+            <input type="text" class="form-control" placeholder="Search" id="input-search">
           </div>
           <button type="button" class="btn btn-default" id="btn-search"><span class="glyphicon glyphicon-search"></span></button>
-      </form>
+        </form>
      </div>
 
-    <div class="col-md-4" id="nav-right">
-        <$ if (user) { $>
-          <a href="/users/<$= user._id $>"><$= user.name $></a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="/logout">Logout</a>
+      <div class="collapse navbar-collapse navHeaderCollapse col-md-4" id="nav-right">
+          <$ if (user) { $>
+            <a href="/users/<$= user._id $>"><$= user.name $></a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="/logout">Logout</a>
           <$ } else { $>
-          <a href="/auth/google">Login with Google</a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="#">Sign-up</a>
+            <a href="/auth/google">Login with Google</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">Sign-up</a>
           <$ } $>
-    </div>
-</nav>
+      </div>
+  </nav>
+
 </header>
 
 
