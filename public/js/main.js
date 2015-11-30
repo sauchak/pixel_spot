@@ -53,19 +53,19 @@ $(document).ready(function() {
     vote($(this).attr("data-id"),$(this).attr("data-value"));
   })
 
-  $("[name=btn-advanced-delete]").on("click",function(){
-    if (confirm("Delete this record?"))
-    {
-      $.ajax({
-        url:"/spots/" + $(this).attr("data-id"),
-        method:'DELETE',
-      }).done(
-        function(data){
-          $("#"+JSON.parse(data)).remove();
-        }
-      );
-    }
-  })
+  var spotId;
+  $('#modal-delete').on('show.bs.modal', function(evt) {
+    spotId = $(evt.relatedTarget).data('id');
+  });
+
+  $('#confirm').on('click', function(e) {
+    $.ajax({
+      url:"/spots/" + spotId,
+      method:'DELETE',
+    }).done(function(data){
+        $("#"+JSON.parse(data)).remove();
+    });
+  });
 
   $("[name=btn-advanced-edit]").on("click",function(){
     document.location.href = "/spots/" + $(this).attr("data-id") + "/edit";
