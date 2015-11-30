@@ -15,7 +15,7 @@ var index = function (req, res, next) {
         return parseFloat(top.rating) - parseFloat(bot.rating);
       });
     });
-    res.render('welcome/index', {spots: spots});
+    res.render('welcome/index', {spots:spots});
   });
 };
 
@@ -49,7 +49,8 @@ var newSpot = function(req, res, next) {
     image_url:"",
     address:"",
   }];
-  res.render('spots/new', {spot:emptySpot});
+  res.render('spots/new', {spot:emptySpot, additionalTags:"", nature:"", urban:"", family:"", beach:"",
+            park:"", engagement:"", garden:"", museum:"", wedding:""});
 };
 
 var edit = function(req, res, next) {
@@ -57,7 +58,21 @@ var edit = function(req, res, next) {
     var spots = user.spots.filter(function(s){
       return s._id == req.params.id;
     });
-    res.render('spots/edit',{spot:spots[0]});
+    var defaultTags = ['nature','urban','family','beach','park','engagement','garden','museum','wedding'];
+    var nature,urban,family,beach,park,engagement,garden,museum,wedding;
+    tags = _.pluck(spots[0].tags,'tag_name');
+    nature = (_.indexOf(tags,'nature') >= 0) ? "CHECKED" : "";
+    urban = (_.indexOf(tags,'urban') >= 0) ? "CHECKED" : "";
+    family = (_.indexOf(tags,'family') >= 0) ? "CHECKED" : "";
+    beach = (_.indexOf(tags,'beach') >= 0) ? "CHECKED" : "";
+    park = (_.indexOf(tags,'park') >= 0) ? "CHECKED" : ""
+    engagement = (_.indexOf(tags,'engagement') >= 0) ? "CHECKED" : "";
+    garden = (_.indexOf(tags,'garden') >= 0) ? "CHECKED" : "";
+    museum = (_.indexOf(tags,'museum') >= 0) ? "CHECKED" : "";
+    wedding = (_.indexOf(tags,'wedding') >= 0) ? "CHECKED" : "";
+    var additionalTags = _.difference(tags,defaultTags).join();
+    res.render('spots/edit',{spot:spots[0], additionalTags:additionalTags, nature:nature, urban:urban, family:family,
+                    beach:beach, park:park, engagement:engagement, garden:garden, museum:museum, wedding:wedding });
   });
 };
 
@@ -183,14 +198,16 @@ var update = function(req, res, next) {
       return rp.get(geoUrl)
     })
     .then(function(data){
-//      zipcode = JSON.parse(data).postalCodes[0].postalCode;
-zipcode = ""
+      console.log(data)
+      zipcode = JSON.parse(data).postalCodes[0].postalCode;
+//zipcode = ""
       var spotId = req.params.id
       var spot = user.spots.id(spotId)
       spot.title = req.body.title,
       spot.description = req.body.description,
       spot.image_url = imageUrl,
       spot.address = req.body.address,
+      spot.zipcode = zipcode,
       spot.rating = 0,
       spot.tags = tags;
       user.save(function(err, user) {
@@ -198,23 +215,6 @@ zipcode = ""
       });
     })
   });
-
-
-/*
-  User.findById(res.locals.user._id, function(err, user){
-    var spotId = req.params.id
-    var spot = user.spots.id(spotId)
-        spot.title = req.body.title,
-        spot.description = req.body.description,
-        spot.image_url = req.body.image_url,
-        spot.address = req.body.address,
-        spot.rating = 0,
-        spot.tags = req.body.tags;
-    user.save(function(err, user) {
-      res.json(JSON.stringify(res.locals.user._id));
-    });
-  });
-*/
 };
 
 //Delete a new spot
@@ -251,12 +251,15 @@ var advancedSearch = function (req, res, next) {
   {
     defaultTags = strToTags(req.query.defaultTags);
   }
-
-  var addTags = strToTags(req.query.additionalTags);
-  tags = defaultTags.concat(addTags);
-
+  var zipcode = req.query.zipcode;
+  if (req.query.additionalTags.length > 0)
+  {
+    var addTags = strToTags(req.query.additionalTags);
+    defaultTags = defaultTags.concat(addTags);
+  }
+  tags = defaultTags;
   var tagQuery = {"spots.tags.tag_name":{"$in":tags}};
-  User.find(tags, function(error, users){
+  User.find(tagQuery, function(error, users){
     if (error) { console.log(error); }
     var spots = _.chain(getSpots(users,tags)).sortBy('rating').reverse();
     res.json(JSON.stringify(spots));

@@ -24,7 +24,7 @@ $(document).ready(function() {
       url:"/spots/search/advanced",
       method:'GET',
       dataType: 'json',
-      data: {"defaultTags":defaultTags, "additionalTags":$("#additional-tags").val()},
+      data: {"defaultTags":defaultTags, "additionalTags":$("#additional-tags").val(), "zipcode":$("#location").val()},
       context: document.body
     }).done(
       function(data){
